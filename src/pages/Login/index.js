@@ -4,7 +4,6 @@ import { login } from "data/auth/rx"
 import { Textfield } from "inputs/Textfield"
 import { Form } from "components/Form"
 import { emailRequired, stringRequired } from "validators"
-import { Label } from "components/Label"
 import * as R from "ramda"
 
 export const Login = () => (
@@ -20,17 +19,10 @@ export const Login = () => (
       password: stringRequired,
     })}
   >
-    {({ form, onChange }) => (
+    {() => (
       <>
-        <Label label="Email" name="email">
-          <Textfield value={form.values.email} onChange={onChange("email")} />
-        </Label>
-        <Label label="Password" name="password">
-          <Textfield
-            value={form.values.password}
-            onChange={onChange("password")}
-          />
-        </Label>
+        <Textfield label="Email" name="email" />
+        <Textfield label="Password" name="password" />
         <button type="submit">sign in</button>
       </>
     )}

@@ -49,15 +49,18 @@ export const Form = ({
     })
   }
 
-  const handleOnChange = name => val =>
+  const currentSchema = schema(form.values)
+  console.log(currentSchema)
+
+  const handleOnChange = name => val => {
+    console.log("name", name)
     setForm(oldState => ({
       ...oldState,
       values: { ...oldState.values, [name]: val },
       touched: { ...oldState.touched, [name]: true },
       errors: { ...oldState.errors, [name]: currentSchema[name](val) },
     }))
-
-  const currentSchema = schema(form.values)
+  }
 
   return (
     <FormContext.Provider

@@ -1,6 +1,6 @@
 import { config } from "config"
-import { getTokens, setAccessToken } from "data/auth/storage"
-import { logout } from "data/auth/rx"
+import { setAccessToken } from "data/auth/storage"
+import { logout, getTokens } from "data/auth/rx"
 import { rxFetch } from "./fetch"
 import { catchError, switchMap, share, throwError } from "rxjs"
 import * as R from "ramda"

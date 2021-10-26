@@ -1,8 +1,10 @@
-import { loggedIn$, logout } from "data/auth/rx"
-import { Login } from "pages/Login"
-import { Content } from "./Content"
+import { loggedIn$ } from "data/auth/rx"
+import { Routes } from "./Routes"
 import React from "react"
+import { ToastNotifications } from "./ToastNotifications"
+import { GlobalStyle } from "./GlobalStyle"
 
+import { ErrorBoundary } from "components/ErrorBoundary"
 const useLoggedIn = () => {
   const [loggedIn, setLoggedIn] = React.useState()
 
@@ -18,12 +20,11 @@ const useLoggedIn = () => {
 export const App = () => {
   const loggedIn = useLoggedIn()
 
-  if (!loggedIn) return <Login />
-
   return (
-    <>
-      <button onClick={logout}>logout</button>
-      <Content />
-    </>
+    <ErrorBoundary>
+      <GlobalStyle />
+      <Routes loggedIn={loggedIn} />
+      <ToastNotifications />
+    </ErrorBoundary>
   )
 }

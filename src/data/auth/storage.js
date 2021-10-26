@@ -1,4 +1,4 @@
-export const getTokens = () => ({
+export const getTokensFromStorage = () => ({
   accessToken: localStorage.getItem("accessToken"),
   refreshToken: localStorage.getItem("refreshToken"),
 })

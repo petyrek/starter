@@ -1,12 +1,14 @@
 import { BehaviorSubject } from "rxjs"
 import {
-  getTokens,
+  getTokensFromStorage,
   setAccessToken,
   setRefreshToken,
   clearTokens,
 } from "./storage"
 
-export const loggedIn$ = new BehaviorSubject(getTokens())
+export const loggedIn$ = new BehaviorSubject(getTokensFromStorage())
+
+export const getTokens = () => loggedIn$.value
 
 export const login = ({ accessToken, refreshToken }) => {
   setAccessToken(accessToken)

@@ -1,12 +1,12 @@
 import React from "react"
-import { Portal } from "react-portal"
+import { Portal } from "components/Portal"
 import { fromEvent } from "rxjs"
-import { debounceTime } from "rxjs/operators"
+import { throunceTime } from "common/rxjs"
 import { ContextMenuWrap } from "./styled"
-import { getPos } from "./helpers"
+import { getPosition } from "./helpers"
 
-export const ContextMenu = ({ children, isOpen, isTooltip }) => {
-  const [pos, setPos] = React.useState({})
+export const ContextMenu = ({ children, isOpen }) => {
+  const [position, setPosition] = React.useState({})
   const ref = React.useRef(null)
 
   const setup = () => {
@@ -17,7 +17,7 @@ export const ContextMenu = ({ children, isOpen, isTooltip }) => {
 
     if (!menu || !toggle) return
 
-    setPos(getPos(menu, toggle))
+    setPosition(getPosition(menu, toggle))
   }
 
   React.useEffect(() => {
@@ -26,8 +26,9 @@ export const ContextMenu = ({ children, isOpen, isTooltip }) => {
 
   React.useEffect(() => {
     const sub1 = fromEvent(window, "resize")
-      .pipe(debounceTime(200))
+      .pipe(throunceTime(200))
       .subscribe(() => setup())
+
     const sub2 = fromEvent(document, "keydown").subscribe(e => {
       if (e.key === "Tab" && isOpen) {
         e.preventDefault()
@@ -49,9 +50,7 @@ export const ContextMenu = ({ children, isOpen, isTooltip }) => {
       }}
     >
       <Portal>
-        <ContextMenuWrap pos={pos} tooltip={isTooltip}>
-          {children}
-        </ContextMenuWrap>
+        <ContextMenuWrap position={position}>{children}</ContextMenuWrap>
       </Portal>
     </div>
   )

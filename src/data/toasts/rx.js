@@ -8,4 +8,5 @@ export const toast = type => message =>
   notifications$.next({ message, type: type, id: id++ })
 
 export const toastError = toast(toastTypes.error)
+export const toastWarning = toast(toastTypes.warning)
 export const toastSuccess = toast(toastTypes.success)

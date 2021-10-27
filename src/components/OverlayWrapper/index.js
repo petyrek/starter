@@ -1,19 +1,14 @@
 import React from "react"
-import { Overlay, OverlayWrapperContent, OverlayWrapperWrap } from "./styled"
+import { OverlayWrapperContent, OverlayWrapperWrap } from "./styled"
 import { useScrollLock } from "hooks/useScrollLock"
+import { Backdrop } from "components/Backdrop"
 
-export const OverlayWrapper = ({
-  isOpen,
-  close,
-  children,
-  transparent,
-
-  ...p
-}) => {
+export const OverlayWrapper = ({ isOpen, close, children, ...p }) => {
   useScrollLock(isOpen)
+
   return (
     <OverlayWrapperWrap {...p}>
-      {isOpen && <Overlay onClick={close} transparent={transparent} />}
+      {isOpen && <Backdrop onClick={close} />}
       <OverlayWrapperContent
         isOpen={isOpen}
         className="overlay-wrapper-content"

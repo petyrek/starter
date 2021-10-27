@@ -6,6 +6,8 @@ import { Page } from "components/Page"
 import { useOpen } from "hooks/useOpen"
 import { Button } from "components/Button"
 import { Modal } from "components/Modal"
+import { toastError, toastWarning, toastSuccess } from "data/toasts/rx"
+import { DatePicker } from "inputs/DatePicker"
 
 // an example of more complex data, first fetches list of events and then detail of each event
 const getStream = () =>
@@ -17,6 +19,7 @@ const getStream = () =>
 
 export const Home = () => {
   const { isOpen, open, close } = useOpen()
+  const [v, setV] = React.useState()
 
   return (
     <Page>
@@ -31,6 +34,10 @@ export const Home = () => {
           content of modal
         </Modal>
       )}
+      <Button text="success" onClick={() => toastSuccess("ololol")} />
+      <Button secondary text="warning" onClick={() => toastWarning("ololol")} />
+      <Button error text="error" onClick={() => toastError("ololol")} />
+      <DatePicker value={v} onChange={setV} />
     </Page>
   )
 }

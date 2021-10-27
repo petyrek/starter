@@ -9,7 +9,7 @@ export const StyledInput = styled.input`
   border: none;
   padding: 0 1rem;
   width: 100%;
-  border-bottom: 0.1rem solid ${theme.color.lightgrey};
+  border-bottom: 0.1rem solid ${theme.color.border};
   border-radius: 0rem;
   -webkit-border-radius: 0rem;
 `

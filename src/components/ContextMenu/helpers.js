@@ -1,4 +1,4 @@
-export const getPos = (menu, toggle) => {
+export const getPosition = (menu, toggle) => {
   const tRect = toggle.getBoundingClientRect()
   const mRect = menu.getBoundingClientRect()
   const openUpwards = tRect.top + tRect.height / 2 > window.innerHeight / 2

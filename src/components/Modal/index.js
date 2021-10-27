@@ -1,12 +1,12 @@
 import React from "react"
 import { Backdrop } from "components/Backdrop"
-import ReactDOM from "react-dom"
+import { Portal } from "components/Portal"
 import { ModalWindow, ModalTitle, ModalBody } from "./styled"
 import { Icon } from "components/Icon"
 import { Cross } from "icons/Cross"
 
-export const Modal = ({ children, close, title }) =>
-  ReactDOM.createPortal(
+export const Modal = ({ children, close, title }) => (
+  <Portal>
     <Backdrop onClick={close}>
       <ModalWindow onClick={e => e.stopPropagation()}>
         {title && (
@@ -17,6 +17,6 @@ export const Modal = ({ children, close, title }) =>
         )}
         <ModalBody>{children}</ModalBody>
       </ModalWindow>
-    </Backdrop>,
-    document.body,
-  )
+    </Backdrop>
+  </Portal>
+)

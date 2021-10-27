@@ -12,7 +12,7 @@ export const InputWrapper = styled(Box)`
   height: 40px;
   padding: 10px 16px;
   border-radius: 4px;
-  border: 1px solid ${theme.colors.white};
+  border: 1px solid #fff;
   background: transparent;
   ${flex};
   ${margins};

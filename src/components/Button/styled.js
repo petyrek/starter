@@ -7,15 +7,12 @@ const darken = color => color
 const getBackground = p => {
   if (p.secondary) return theme.color.secondary
   if (p.error) return theme.color.error
-  if (p.grey) return theme.color.lightgrey
 
   return theme.color.primary
 }
 
 const getColor = p => {
-  if (p.grey) return theme.color.grey
-
-  return theme.color.white
+  return "#fff"
 }
 
 const getTheme = p => {

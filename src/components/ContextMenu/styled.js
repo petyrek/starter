@@ -2,8 +2,8 @@ import styled from "styled-components/macro"
 import { theme } from "theme"
 
 export const ContextMenuWrap = styled.div`
-  border-radius: 4px;
-  background: blue;
+  border: 1px solid black;
+  background: #fff;
   position: fixed;
   z-index: ${theme.zIndices.contextMenu};
   overflow-y: auto;

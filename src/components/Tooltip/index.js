@@ -4,7 +4,7 @@ import { useOpen } from "hooks/useOpen"
 import { TooltipWrap, StyledTooltip } from "./styled"
 
 export const Tooltip = ({ content, children }) => {
-  const { isOpen, open, close } = useOpen()
+  const { isOpen, open, close } = useOpen(true)
 
   return (
     <OverlayWrapper isOpen={isOpen} close={close}>

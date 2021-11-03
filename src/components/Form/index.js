@@ -50,10 +50,8 @@ export const Form = ({
   }
 
   const currentSchema = schema(form.values)
-  console.log(currentSchema)
 
   const handleOnChange = name => val => {
-    console.log("name", name)
     setForm(oldState => ({
       ...oldState,
       values: { ...oldState.values, [name]: val },
@@ -75,6 +73,7 @@ export const Form = ({
           form,
           onChange: handleOnChange,
           onSubmit: handleSubmit,
+          hasErrors: R.values(form.erros).find(x => x),
         })}
       </form>
     </FormContext.Provider>

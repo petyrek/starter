@@ -1,12 +1,24 @@
+import * as R from "ramda"
+
 // stops execution of validators when the previous one yields error
-const combineValidators =
+export const combineValidators =
   (...validatorFunctions) =>
   v =>
     validatorFunctions.reduce((acc, cur) => (acc ? acc : cur(v)), "")
 
-export const stringRequired = v => !v && "Field is required"
+export const fieldRequired = v => !v && "Field is required"
+
+export const numberRequired = combineValidators(
+  fieldRequired,
+  v => R.type(v) !== "Number" && "Must be number",
+)
+
+export const stringRequired = combineValidators(
+  fieldRequired,
+  v => R.type(v) !== "String" && "Must be string",
+)
 
 export const emailRequired = combineValidators(
-  stringRequired,
+  fieldRequired,
   v => !/\S+@\S+\.\S+/.test(v) && "Incorrect email format",
 )

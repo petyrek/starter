@@ -10,10 +10,11 @@ export class Portal extends React.Component {
   }
 
   render() {
-    if (this.props.node && !this.defaultNode) {
+    if (!this.props.node && !this.defaultNode) {
       this.defaultNode = document.createElement("div")
       document.body.appendChild(this.defaultNode)
     }
+
     return ReactDOM.createPortal(
       this.props.children,
       this.props.node || this.defaultNode,

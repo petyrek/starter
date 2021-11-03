@@ -1,5 +1,5 @@
 import React from "react"
-import moment from "moment"
+import dayjs from "dayjs"
 import { OverlayWrapper } from "components/OverlayWrapper"
 import { useOpen } from "hooks/useOpen"
 import { ContextMenu } from "components/ContextMenu"
@@ -12,10 +12,7 @@ export const DatePicker = withField(({ value, onChange }) => {
 
   return (
     <OverlayWrapper isOpen={isOpen} close={close}>
-      <Textfield
-        value={moment(value).format("DD. MM. YYYY")}
-        onClick={toggle}
-      />
+      <Textfield value={dayjs(value).format("DD. MM. YYYY")} onClick={toggle} />
       <ContextMenu isOpen={isOpen}>
         <Calendar
           onChange={v => {

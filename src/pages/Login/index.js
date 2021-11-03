@@ -3,8 +3,7 @@ import { authRequest } from "data/auth/api"
 import { login } from "data/auth/rx"
 import { Textfield } from "inputs/Textfield"
 import { Form } from "components/Form"
-import { emailRequired, stringRequired } from "validators"
-import * as R from "ramda"
+import { combineValidators, emailRequired, stringRequired } from "validators"
 
 export const Login = () => (
   <Form
@@ -14,16 +13,22 @@ export const Login = () => (
       email: "john@doe.com",
       password: "hunter2",
     }}
-    schema={R.always({
+    schema={values => ({
       email: emailRequired,
-      password: stringRequired,
+      password: combineValidators(stringRequired),
+      repeatPassword: combineValidators(
+        stringRequired,
+        v => values.password !== v && "Password is not same",
+      ),
     })}
   >
-    {() => (
+    {({ hasErrors }) => (
       <>
         <Textfield label="Email" name="email" />
         <Textfield label="Password" name="password" />
-        <button type="submit">sign in</button>
+        <button type="submit" disabled={hasErrors}>
+          sign in
+        </button>
       </>
     )}
   </Form>

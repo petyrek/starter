@@ -1,30 +1,13 @@
-import { loggedIn$ } from "data/auth/rx"
-import { Routes } from "./Routes"
+import { AppRoutes } from "./AppRoutes"
 import React from "react"
 import { ToastNotifications } from "./ToastNotifications"
 import { GlobalStyle } from "./GlobalStyle"
-
 import { ErrorBoundary } from "components/ErrorBoundary"
-const useLoggedIn = () => {
-  const [loggedIn, setLoggedIn] = React.useState()
 
-  React.useEffect(() => {
-    loggedIn$.subscribe(x => {
-      setLoggedIn(x.accessToken)
-    })
-  }, [])
-
-  return loggedIn
-}
-
-export const App = () => {
-  const loggedIn = useLoggedIn()
-
-  return (
+export const App = () => (
     <ErrorBoundary>
       <GlobalStyle />
-      <Routes loggedIn={loggedIn} />
+      <AppRoutes />
       <ToastNotifications />
     </ErrorBoundary>
   )
-}

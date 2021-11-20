@@ -1,6 +1,6 @@
 import { config } from "config"
-import { setAccessToken } from "data/auth/storage"
-import { logout, getTokens } from "data/auth/rx"
+import { setAccessToken, getTokensFromStorage } from "data/auth/storage"
+import { logout } from "data/auth/rx"
 import { rxFetch } from "./fetch"
 import { catchError, switchMap, share, throwError } from "rxjs"
 import * as R from "ramda"
@@ -10,7 +10,7 @@ let refresh$
 
 const request = method => (url, data) => {
   // get tokens from local storage
-  const tokens = getTokens()
+  const tokens = getTokensFromStorage()
 
   return rxFetch({
     url: config.apiRoot + url,

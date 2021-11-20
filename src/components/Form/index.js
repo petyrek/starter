@@ -3,14 +3,14 @@ import * as R from "ramda"
 import { toastError } from "data/toasts/rx"
 import { Loader } from "components/Loader"
 import { noop } from "common/functions"
-import { useHistory } from "react-router"
+import { useNavigate } from "react-router"
 
 export const FormContext = React.createContext()
 
 export const Form = ({
   onSubmit,
   onSuccess = noop,
-  redirect = noop,
+  redirect,
   initialValues = {},
   schema = R.always({}),
   children,
@@ -25,7 +25,7 @@ export const Form = ({
     isSubmitting: false,
   })
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleSubmit = e => {
     e?.preventDefault()
@@ -37,7 +37,7 @@ export const Form = ({
         setForm(oldState => ({ ...oldState, isSubmitting: false }))
 
         if (redirect) {
-          history.push(redirect(response))
+          navigate(redirect(response))
         }
       },
       error: err => {

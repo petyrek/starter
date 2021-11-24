@@ -3,7 +3,11 @@ import { authRequest } from "data/auth/api"
 import { login } from "data/auth/rx"
 import { Textfield } from "inputs/Textfield"
 import { Form } from "components/Form"
-import { combineValidators, emailRequired, stringRequired } from "validators"
+import {
+  // combineValidators,
+  emailRequired,
+  stringRequired,
+} from "validators"
 
 export const Login = () => (
   <Form
@@ -15,11 +19,12 @@ export const Login = () => (
     }}
     schema={values => ({
       email: emailRequired,
-      password: combineValidators(stringRequired),
-      repeatPassword: combineValidators(
-        stringRequired,
-        v => values.password !== v && "Password is not same",
-      ),
+      password: stringRequired,
+      // such validator would be used on the register page for "repeat password" field
+      // repeatPassword: combineValidators(
+      //   stringRequired,
+      //   v => values.password !== v && "Password is not same",
+      // ),
     })}
   >
     {({ hasErrors }) => (

@@ -1,4 +1,4 @@
-import React from "react"
+
 import { StyledInput } from "./styled"
 import { withField } from "hoc/withField"
 

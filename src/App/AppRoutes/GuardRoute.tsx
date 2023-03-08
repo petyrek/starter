@@ -1,4 +1,4 @@
-import React from "react"
+
 import { Navigate, useLocation } from "react-router-dom"
 import { urls, types } from "pages/urls"
 import { useLoggedIn } from "hooks/useLoggedIn"

@@ -1,4 +1,4 @@
-import React from "react"
+
 import { authRequest } from "data/auth/api"
 import { login } from "data/auth/rx"
 import { Textfield } from "inputs/Textfield"

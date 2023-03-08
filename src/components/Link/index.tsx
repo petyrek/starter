@@ -1,4 +1,4 @@
-import React from "react"
+
 import { StyledLink, StyledNoLink } from "./styled"
 
 export const Link = ({ children, ...props }) => {

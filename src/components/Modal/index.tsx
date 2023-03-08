@@ -1,4 +1,4 @@
-import React from "react"
+
 import { Backdrop } from "components/Backdrop"
 import { Portal } from "components/Portal"
 import { ModalWindow, ModalTitle, ModalBody } from "./styled"

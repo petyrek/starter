@@ -1,4 +1,4 @@
-import React from "react"
+
 import { MonthWrap, Week } from "./styled"
 import * as R from "ramda"
 import { Day } from "./Day"

@@ -1,4 +1,4 @@
-import React from "react"
+
 import { StyledError } from "./styled"
 import { useOpen } from "hooks/useOpen"
 

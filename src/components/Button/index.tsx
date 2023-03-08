@@ -1,4 +1,4 @@
-import React from "react"
+
 import { StyledButton } from "./styled"
 import { Link } from "components/Link"
 

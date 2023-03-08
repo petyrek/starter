@@ -1,4 +1,4 @@
-import React from "react"
+
 import * as R from "ramda"
 import { toastError } from "data/toasts/rx"
 import { Loader } from "components/Loader"

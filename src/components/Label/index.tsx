@@ -1,4 +1,4 @@
-import React from "react"
+
 import { LabelWrapper, LabelText, LabelError } from "./styled"
 
 export const Label = ({ label, children, error }) => (

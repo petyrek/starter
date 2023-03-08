@@ -1,4 +1,4 @@
-import React from "react"
+
 import { logout } from "data/auth/rx"
 import { StyledHeader } from "./styled"
 import { Button } from "components/Button"

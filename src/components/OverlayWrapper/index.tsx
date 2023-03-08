@@ -1,4 +1,4 @@
-import React from "react"
+
 import { OverlayWrapperContent, OverlayWrapperWrap } from "./styled"
 import { useScrollLock } from "hooks/useScrollLock"
 import { Backdrop } from "components/Backdrop"

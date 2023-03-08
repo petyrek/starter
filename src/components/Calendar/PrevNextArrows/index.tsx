@@ -1,4 +1,4 @@
-import React from "react"
+
 import { ArrowRight } from "icons/ArrowRight"
 import { PrevNextArrowsWrap, Title } from "./styled"
 import { isLastMode } from "../modes"

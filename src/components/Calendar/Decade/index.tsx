@@ -1,4 +1,4 @@
-import React from "react"
+
 import { DecadeWrap, StyledDecade } from "./styled"
 import dayjs from "dayjs"
 import * as R from "ramda"

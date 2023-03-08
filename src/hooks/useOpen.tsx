@@ -1,4 +1,4 @@
-import React from "react"
+
 import * as R from "ramda"
 
 export const useOpen = (init = false) => {

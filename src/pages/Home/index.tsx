@@ -1,4 +1,4 @@
-import React from "react"
+
 import { eventsRequest } from "data/events/api"
 import { Data } from "components/Data"
 import { forkJoin, mergeMap } from "rxjs"

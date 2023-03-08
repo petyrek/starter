@@ -1,4 +1,4 @@
-import React from "react"
+
 import { YearWrap, StyledYear } from "./styled"
 import dayjs from "dayjs"
 import { months } from "../months"

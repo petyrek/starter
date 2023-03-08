@@ -23,5 +23,5 @@ export const theme = {
     toasts: 5,
   },
   breakpoints,
-  mq: R.map(x => `@media (min-width: ${x}px)`, breakpoints),
+  mq: R.mapObjIndexed(v => `@media (min-width: ${v}px)`, breakpoints),
 }

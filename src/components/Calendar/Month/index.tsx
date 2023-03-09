@@ -1,13 +1,23 @@
-
 import { MonthWrap, Week } from "./styled"
 import * as R from "ramda"
 import { Day } from "./Day"
 import { daysOfWeek } from "./daysOfWeek"
 import { getDateRange } from "./helpers"
+import { FC } from "react"
+import { Dayjs } from "dayjs"
 
-const handleOverflow = num => (num < 0 ? 6 : num)
+const handleOverflow = (num: number) => (num < 0 ? 6 : num)
 
-export const Month = ({
+type Props = {
+  month: Dayjs
+  value: any
+  onChange: (v: any) => void
+  noFuture?: boolean
+  minDate?: Date
+  maxDate?: Date
+}
+
+export const Month: FC<Props> = ({
   month,
   onChange,
   value,
@@ -34,7 +44,7 @@ export const Month = ({
         <Week key={gi}>
           {g.map(d => (
             <Day
-              key={d}
+              key={d.toISOString()}
               day={d}
               value={value}
               onChange={onChange}

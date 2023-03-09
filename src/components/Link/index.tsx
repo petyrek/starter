@@ -1,8 +1,11 @@
+import { FC, ReactNode } from "react"
+import { StyledLink } from "./styled"
 
-import { StyledLink, StyledNoLink } from "./styled"
+type LinkProps = {
+  children: ReactNode
+  to: string
+}
 
-export const Link = ({ children, ...props }) => {
-  const Element = props.to ? StyledLink : StyledNoLink
-
-  return <Element {...props}>{children}</Element>
+export const Link: FC<LinkProps> = ({ children, ...props }) => {
+  return <StyledLink {...props}>{children}</StyledLink>
 }

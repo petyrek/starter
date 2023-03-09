@@ -3,7 +3,7 @@ import * as R from "ramda"
 const breakpoints = {
   tablet: 768,
   desktop: 1024,
-}
+} as const
 
 export const theme = {
   color: {
@@ -24,4 +24,4 @@ export const theme = {
   },
   breakpoints,
   mq: R.mapObjIndexed(v => `@media (min-width: ${v}px)`, breakpoints),
-}
+} as const

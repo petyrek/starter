@@ -1,10 +1,15 @@
-
 import { DecadeWrap, StyledDecade } from "./styled"
 import dayjs from "dayjs"
 import * as R from "ramda"
 import { startOfDecade } from "../decades"
+import { FC } from "react"
 
-export const Decade = ({ onChange, offset }) => {
+type Props = {
+  onChange: (v: any) => void
+  offset: number
+}
+
+export const Decade: FC<Props> = ({ onChange, offset }) => {
   const start = startOfDecade(offset * 10)
 
   return (

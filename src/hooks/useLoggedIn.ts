@@ -1,13 +1,13 @@
 import { loggedIn$ } from "data/auth/rx"
 import { getTokensFromStorage } from "data/auth/storage"
-
+import { useEffect, useState } from "react"
 
 export const useLoggedIn = () => {
-  const [loggedIn, setLoggedIn] = React.useState(!!getTokensFromStorage().accessToken)
+  const [loggedIn, setLoggedIn] = useState(!!getTokensFromStorage().accessToken)
 
-  React.useEffect(() => {
+  useEffect(() => {
     loggedIn$.subscribe(x => {
-      setLoggedIn(x.accessToken)
+      setLoggedIn(!!x.accessToken)
     })
   }, [])
 

@@ -1,6 +1,6 @@
+import { FC } from "react"
 
-
-export const Chevron = () => (
+export const Chevron: FC = () => (
   <svg
     width="24"
     height="24"

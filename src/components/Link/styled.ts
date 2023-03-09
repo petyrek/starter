@@ -1,16 +1,8 @@
-import styled, { css } from "styled-components/macro"
+import styled from "styled-components/macro"
 import { Link } from "react-router-dom"
 import { theme } from "theme"
 
-const linkStyle = css`
+export const StyledLink = styled(Link)`
   text-decoration: none;
   color: ${theme.color.darkgrey};
-`
-
-export const StyledLink = styled(Link)`
-  ${linkStyle};
-`
-
-export const StyledNoLink = styled.div`
-  ${linkStyle};
 `

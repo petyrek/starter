@@ -1,19 +1,29 @@
+import { ErrorDetail } from "./ErrorDetail"
+import { Component, ReactNode } from "react"
 
-import { Error } from "components/Error"
+type Props = {
+  children: ReactNode
+}
 
-export class ErrorBoundary extends React.Component {
-  constructor(props) {
+type State = {
+  error: Error | null
+}
+
+export class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
     super(props)
-    this.state = { hasError: false }
+    this.state = {
+      error: null,
+    }
   }
 
-  componentDidCatch() {
-    this.setState({ hasError: true })
+  componentDidCatch(e: Error) {
+    this.setState({ error: e })
   }
 
   render() {
-    if (this.state.hasError) {
-      return <Error />
+    if (this.state.error) {
+      return <ErrorDetail error={this.state.error} />
     }
 
     return this.props.children

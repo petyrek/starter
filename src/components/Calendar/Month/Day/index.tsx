@@ -1,8 +1,18 @@
-
 import { DayWrap } from "./styled"
-import dayjs from "dayjs"
+import dayjs, { Dayjs } from "dayjs"
+import { FC } from "react"
 
-export const Day = ({
+type Props = {
+  day: Dayjs
+  month: Dayjs
+  value: any
+  onChange: (v: any) => void
+  noFuture?: boolean
+  minDate?: Date
+  maxDate?: Date
+}
+
+export const Day: FC<Props> = ({
   onChange,
   day,
   value,

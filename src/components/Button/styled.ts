@@ -1,21 +1,26 @@
 import styled, { css } from "styled-components/macro"
 import { theme } from "theme"
 
-// TODO
-const darken = color => color
+export type StyledButtonProps = {
+  secondary?: boolean
+  error?: boolean
+}
 
-const getBackground = p => {
+// TODO
+const darken = (amount: number, color: string): string => color
+
+const getBackground = (p: StyledButtonProps) => {
   if (p.secondary) return theme.color.secondary
   if (p.error) return theme.color.error
 
   return theme.color.primary
 }
 
-const getColor = p => {
+const getColor = (p: StyledButtonProps): string => {
   return "#fff"
 }
 
-const getTheme = p => {
+const getTheme = (p: StyledButtonProps) => {
   const bg = getBackground(p)
 
   return css`

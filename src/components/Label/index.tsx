@@ -1,7 +1,13 @@
-
+import { FC, ReactNode } from "react"
 import { LabelWrapper, LabelText, LabelError } from "./styled"
 
-export const Label = ({ label, children, error }) => (
+type LabelProps = {
+  label?: string
+  children: ReactNode
+  error?: string
+}
+
+export const Label: FC<LabelProps> = ({ label, children, error }) => (
   <LabelWrapper>
     {label && <LabelText>{label}</LabelText>}
     {children}

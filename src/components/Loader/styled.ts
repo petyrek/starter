@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components/macro"
 
-export const StyledLoader = styled.div`
+type StyledLoaderProps = {
+  fullscreen?: boolean
+}
+
+export const StyledLoader = styled.div<StyledLoaderProps>`
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
   color: white;

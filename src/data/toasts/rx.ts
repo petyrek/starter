@@ -1,10 +1,10 @@
 import { Subject } from "rxjs"
-import { toastTypes } from "./toastTypes"
+import { Toast, ToastType, toastTypes } from "./types"
 
-export const notifications$ = new Subject()
+export const notifications$ = new Subject<Toast>()
 
 let id = 0
-export const toast = type => message =>
+export const toast = (type: ToastType) => (message: string) =>
   notifications$.next({ message, type: type, id: id++ })
 
 export const toastError = toast(toastTypes.error)

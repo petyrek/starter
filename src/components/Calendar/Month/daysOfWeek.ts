@@ -1,1 +1,9 @@
-export const daysOfWeek = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+export const daysOfWeek = [
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat",
+  "sun",
+] as const

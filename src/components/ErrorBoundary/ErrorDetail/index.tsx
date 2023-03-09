@@ -1,8 +1,12 @@
-
 import { StyledError } from "./styled"
 import { useOpen } from "hooks/useOpen"
+import { FC } from "react"
 
-export const Error = ({ error }) => {
+type Props = {
+  error: Error
+}
+
+export const ErrorDetail: FC<Props> = ({ error }) => {
   const { isOpen, toggle } = useOpen()
 
   return (

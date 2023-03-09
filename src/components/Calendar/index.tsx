@@ -1,14 +1,28 @@
-import React, { useState } from "react"
+import React, { FC, useState } from "react"
 import dayjs from "dayjs"
 import { Month } from "./Month"
 import { Year } from "./Year"
 import { Decade } from "./Decade"
 import { PrevNextArrows } from "./PrevNextArrows"
-import { modes } from "./modes"
+import { CalendarMode, modes } from "./modes"
 
-export const Calendar = ({ onChange, value, noFuture, minDate, maxDate }) => {
-  const [mode, setMode] = useState(modes.month)
-  const [offset, setOffset] = useState(
+type Props = {
+  value: any
+  onChange: (v: any) => void
+  noFuture?: boolean
+  minDate?: Date
+  maxDate?: Date
+}
+
+export const Calendar: FC<Props> = ({
+  onChange,
+  value,
+  noFuture,
+  minDate,
+  maxDate,
+}) => {
+  const [mode, setMode] = useState<CalendarMode>(modes.month)
+  const [offset, setOffset] = useState<number>(
     value
       ? dayjs(value).startOf("month").diff(dayjs().startOf("month"), "months")
       : 0,

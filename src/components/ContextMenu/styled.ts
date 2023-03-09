@@ -1,7 +1,12 @@
 import styled from "styled-components/macro"
 import { theme } from "theme"
+import { Position } from "./helpers"
 
-export const ContextMenuWrap = styled.div`
+type ContextMenuWrapProps = {
+  position: Position
+}
+
+export const ContextMenuWrap = styled.div<ContextMenuWrapProps>`
   border: 1px solid black;
   background: #fff;
   position: fixed;

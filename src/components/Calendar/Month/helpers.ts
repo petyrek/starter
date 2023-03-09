@@ -1,4 +1,6 @@
-export const getDateRange = (start, end) => {
+import { Dayjs } from "dayjs"
+
+export const getDateRange = (start: Dayjs, end: Dayjs): Dayjs[] => {
   let day = start
   let days = []
 

@@ -1,13 +1,18 @@
-
 import { Portal } from "components/Portal"
 import { fromEvent } from "rxjs"
 import { throunceTime } from "common/rxjs"
 import { ContextMenuWrap } from "./styled"
-import { getPosition } from "./helpers"
+import { getPosition, Position } from "./helpers"
+import { FC, ReactNode, useEffect, useRef, useState } from "react"
 
-export const ContextMenu = ({ children, isOpen }) => {
-  const [position, setPosition] = React.useState({})
-  const ref = React.useRef(null)
+type Props = {
+  children: ReactNode
+  isOpen: boolean
+}
+
+export const ContextMenu: FC<Props> = ({ children, isOpen }) => {
+  const [position, setPosition] = useState<Position>({})
+  const ref = useRef<HTMLElement | null>(null)
 
   const setup = () => {
     if (!isOpen) return
@@ -20,17 +25,17 @@ export const ContextMenu = ({ children, isOpen }) => {
     setPosition(getPosition(menu, toggle))
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     setup()
   }, [isOpen]) // eslint-disable-line
 
-  React.useEffect(() => {
+  useEffect(() => {
     const sub1 = fromEvent(window, "resize")
       .pipe(throunceTime(200))
       .subscribe(() => setup())
 
     const sub2 = fromEvent(document, "keydown").subscribe(e => {
-      if (e.key === "Tab" && isOpen) {
+      if ("key" in e && e.key === "Tab" && isOpen) {
         e.preventDefault()
       }
     })

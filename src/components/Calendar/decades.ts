@@ -1,8 +1,8 @@
 import dayjs from "dayjs"
 
-const yearToDecadeEndingWith = ending => offsetYears => {
+const yearToDecadeEndingWith = (ending: number) => (offsetYears: number) => {
   const y = dayjs().add(offsetYears, "years").format("YYYY")
-  return +`${parseInt(y / 10, 10)}${ending}`
+  return +`${parseInt(`${+y / 10}`, 10)}${ending}`
 }
 
 export const startOfDecade = yearToDecadeEndingWith(0)

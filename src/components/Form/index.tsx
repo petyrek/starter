@@ -1,34 +1,62 @@
-
 import * as R from "ramda"
 import { toastError } from "data/toasts/rx"
 import { Loader } from "components/Loader"
 import { noop } from "common/functions"
 import { useNavigate } from "react-router"
+import { FC, ReactNode, useState } from "react"
+import { Observable } from "rxjs"
+import { Validator } from "validators"
 
-export const FormContext = React.createContext()
+// TODO - derive types from Schema
+type Schema = Record<string, Validator<any>>
+type Values = Record<string, any>
+type ResultValues = Record<string, any>
+type Errors = Record<string, string>
+type Touched = Record<string, boolean>
 
-export const Form = ({
+export type FormOnChange = (k: string) => (v: any) => void
+
+export type FormState = {
+  values: Values
+  errors: Errors
+  touched: Touched
+  isSubmitting: boolean
+}
+
+type ChildrenProps = {
+  form: FormState
+  onChange: FormOnChange
+  hasErrors: boolean
+}
+
+type Props = {
+  schema: Schema
+  onSubmit: (values: Values) => Observable<ResultValues>
+  onSuccess: (result: ResultValues) => void
+  redirect?: (result: ResultValues) => string
+  initialValues?: Values
+  children: (p: ChildrenProps) => ReactNode
+}
+
+export const Form: FC<Props> = ({
+  schema,
   onSubmit,
   onSuccess = noop,
   redirect,
   initialValues = {},
-  schema = R.always({}),
   children,
 }) => {
-  const [form, setForm] = React.useState({
+  const [form, setForm] = useState<FormState>({
     values: initialValues,
-    errors: R.mapObjIndexed(
-      (value, key) => value(initialValues[key]),
-      schema(initialValues),
-    ),
+    errors: R.mapObjIndexed((value, key) => value(initialValues[key]), schema),
     touched: {},
     isSubmitting: false,
   })
 
   const navigate = useNavigate()
 
-  const handleSubmit = e => {
-    e?.preventDefault()
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
     setForm(oldState => ({ ...oldState, isSubmitting: true }))
 
     onSubmit(form.values).subscribe({
@@ -49,33 +77,26 @@ export const Form = ({
     })
   }
 
-  const currentSchema = schema(form.values)
-
-  const handleOnChange = name => val => {
+  const handleOnChange = (name: string) => (val: any) => {
     setForm(oldState => ({
       ...oldState,
       values: { ...oldState.values, [name]: val },
       touched: { ...oldState.touched, [name]: true },
-      errors: { ...oldState.errors, [name]: currentSchema[name](val) },
+      errors: {
+        ...oldState.errors,
+        [name]: schema[name as keyof typeof schema](val),
+      },
     }))
   }
 
   return (
-    <FormContext.Provider
-      value={{
+    <form onSubmit={handleSubmit}>
+      {form.isSubmitting && <Loader />}
+      {children({
         form,
         onChange: handleOnChange,
-      }}
-    >
-      <form onSubmit={handleSubmit}>
-        {form.isSubmitting && <Loader />}
-        {children({
-          form,
-          onChange: handleOnChange,
-          onSubmit: handleSubmit,
-          hasErrors: R.values(form.erros).find(x => x),
-        })}
-      </form>
-    </FormContext.Provider>
+        hasErrors: !!R.values(form.errors).find(x => x),
+      })}
+    </form>
   )
 }

@@ -1,1 +1,3 @@
-export const noop = () => {}
+import { SideEffect } from "./types"
+
+export const noop: SideEffect = () => {}

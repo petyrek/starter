@@ -1,12 +1,15 @@
 import { switchMap, throwError } from "rxjs"
 import { fromFetch } from "rxjs/fetch"
 
-// create observable from a promise
-// use axios, which transforms responses in a nice way
-export const rxFetch = ({ url, data, ...config }) =>
+type RxFetch = {
+  url: string
+  data: Object
+} & RequestInit
+
+export const rxFetch = ({ url, data, ...config }: RxFetch) =>
   fromFetch(url, {
-    ...config,
     body: JSON.stringify(data),
+    ...config,
   }).pipe(
     switchMap(response => {
       if (response.ok) {
@@ -14,6 +17,6 @@ export const rxFetch = ({ url, data, ...config }) =>
         return response.json()
       }
 
-      return throwError()
+      return throwError(() => new Error())
     }),
   )

@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react"
 
-export function useScrollLock(lock) {
+export function useScrollLock(lock: boolean) {
   const [scrollLocked, setScrollLocked] = useState(lock || false)
 
   // value is stored to prevent body overflow styles override with initial useScrollLock(false)
   const locked = useRef(false)
 
   // after scroll is unlocked body overflow style returns to the previous known value
-  const bodyOverflow = useRef(null)
+  const bodyOverflow = useRef<string | null>(null)
 
   const unlockScroll = () => {
     if (locked.current) {

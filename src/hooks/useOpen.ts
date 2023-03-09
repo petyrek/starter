@@ -1,8 +1,8 @@
-
 import * as R from "ramda"
+import { useState } from "react"
 
 export const useOpen = (init = false) => {
-  const [isOpen, setOpen] = React.useState(init)
+  const [isOpen, setOpen] = useState(init)
 
   return {
     isOpen,

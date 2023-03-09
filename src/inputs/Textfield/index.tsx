@@ -1,11 +1,15 @@
-
+import { FC } from "react"
 import { StyledInput } from "./styled"
-import { withField } from "hoc/withField"
 
-export const Textfield = withField(({ onChange, value, ...rest }) => (
+type Props = {
+  onChange: (v: string) => void
+  value: string
+}
+
+export const Textfield: FC<Props> = ({ onChange, value, ...rest }) => (
   <StyledInput
     {...rest}
     onChange={e => onChange(e.target.value)}
-    value={value || ""}
+    value={value}
   />
-))
+)

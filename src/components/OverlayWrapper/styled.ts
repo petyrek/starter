@@ -6,7 +6,11 @@ export const OverlayWrapperWrap = styled.div`
   cursor: pointer;
 `
 
-export const OverlayWrapperContent = styled.div`
+type OverlayWrapperContentProps = {
+  isOpen: boolean
+}
+
+export const OverlayWrapperContent = styled.div<OverlayWrapperContentProps>`
   ${p =>
     p.isOpen &&
     css`

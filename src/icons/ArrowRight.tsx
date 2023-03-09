@@ -1,6 +1,6 @@
+import { FC } from "react"
 
-
-export const ArrowRight = () => (
+export const ArrowRight: FC = () => (
   <svg
     width="24"
     height="24"

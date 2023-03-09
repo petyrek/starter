@@ -1,37 +1,39 @@
-
 import { ArrowRight } from "icons/ArrowRight"
 import { PrevNextArrowsWrap, Title } from "./styled"
-import { isLastMode } from "../modes"
+import { CalendarMode } from "../modes"
 import { getTitle, calculateHigherModeAndOffset } from "./helpers"
 import { Icon } from "components/Icon"
+import { FC } from "react"
 
-export const PrevNextArrows = ({ offset, setOffset, mode, setMode }) => {
-  const isLast = isLastMode(mode)
-
-  return (
-    <PrevNextArrowsWrap>
-      <Icon
-        rotate="1"
-        icon={ArrowRight}
-        onClick={() => setOffset(offset - 1)}
-      />
-      <Title
-        onClick={
-          isLast
-            ? undefined
-            : () => {
-                const [nextMode, nextOffset] = calculateHigherModeAndOffset(
-                  mode,
-                  offset,
-                )
-                setMode(nextMode)
-                setOffset(nextOffset)
-              }
-        }
-      >
-        {getTitle(mode, offset)}
-      </Title>
-      <Icon icon={ArrowRight} onClick={() => setOffset(offset + 1)} />
-    </PrevNextArrowsWrap>
-  )
+type Props = {
+  offset: number
+  setOffset: (v: number) => void
+  mode: CalendarMode
+  setMode: (v: CalendarMode) => void
 }
+
+export const PrevNextArrows: FC<Props> = ({
+  offset,
+  setOffset,
+  mode,
+  setMode,
+}) => (
+  <PrevNextArrowsWrap>
+    <Icon rotate="1" icon={ArrowRight} onClick={() => setOffset(offset - 1)} />
+    <Title
+      onClick={() => {
+        const next = calculateHigherModeAndOffset(mode, offset)
+
+        if (next) {
+          const [nextMode, nextOffset] = next
+
+          setMode(nextMode)
+          setOffset(nextOffset)
+        }
+      }}
+    >
+      {getTitle(mode, offset)}
+    </Title>
+    <Icon icon={ArrowRight} onClick={() => setOffset(offset + 1)} />
+  </PrevNextArrowsWrap>
+)

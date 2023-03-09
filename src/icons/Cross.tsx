@@ -1,6 +1,6 @@
+import { FC } from "react"
 
-
-export const Cross = () => (
+export const Cross: FC = () => (
   <svg
     width="24"
     height="24"

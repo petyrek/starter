@@ -1,8 +1,12 @@
 import styled, { css } from "styled-components/macro"
 import { theme } from "theme"
-import { toastTypes } from "data/toasts/toastTypes"
+import { ToastType, toastTypes } from "data/toasts/types"
 
-export const StyledToast = styled.div`
+type StyledToastProps = {
+  type: ToastType
+}
+
+export const StyledToast = styled.div<StyledToastProps>`
   display: flex;
   justify-content: space-between;
 

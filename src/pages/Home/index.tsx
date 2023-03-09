@@ -1,26 +1,25 @@
-
 import { eventsRequest } from "data/events/api"
 import { Data } from "components/Data"
-import { forkJoin, mergeMap } from "rxjs"
+import { forkJoin, mergeMap, Observable } from "rxjs"
 import { Page } from "components/Page"
 import { Button } from "components/Button"
-import { Modal } from "components/Modal"
 import { toastError, toastWarning, toastSuccess } from "data/toasts/rx"
 import { DatePicker } from "inputs/DatePicker"
 import { Tooltip } from "components/Tooltip"
-import { ButtonGroup } from "components/ButtonGroup"
 import { ButtonModal } from "components/ButtonModal"
+import { FC, useState } from "react"
+import { Event } from "data/events/types"
 
 // an example of more complex data, first fetches list of events and then detail of each event
-const getStream = () =>
+const getStream = (): Observable<Event[]> =>
   eventsRequest
     .list()
     .pipe(
       mergeMap(x => forkJoin(x.map(event => eventsRequest.detail(event.id)))),
     )
 
-export const Home = () => {
-  const [v, setV] = React.useState()
+export const Home: FC = () => {
+  const [v, setV] = useState<string>()
 
   return (
     <Page>
@@ -30,12 +29,8 @@ export const Home = () => {
         </Data>
       </ul>
 
-      <ButtonGroup>
-        <ButtonModal
-          text="Open modal"
-          Modal={p => <Modal {...p}>content</Modal>}
-          title="title"
-        />
+      <div>
+        <ButtonModal text="Open modal" title="title" modalContent={"content"} />
         <Button text="success" onClick={() => toastSuccess("ololol")} />
         <Button
           secondary
@@ -43,7 +38,7 @@ export const Home = () => {
           onClick={() => toastWarning("ololol")}
         />
         <Button error text="error" onClick={() => toastError("ololol")} />
-      </ButtonGroup>
+      </div>
       <DatePicker value={v} onChange={setV} />
       <Tooltip content={<span>custom tooltip ex</span>}>
         <div>tooltip example</div>

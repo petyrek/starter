@@ -1,12 +1,14 @@
-export const getTokensFromStorage = () => ({
+import { PartialTokens } from "./types"
+
+export const getTokensFromStorage = (): PartialTokens => ({
   accessToken: localStorage.getItem("accessToken"),
   refreshToken: localStorage.getItem("refreshToken"),
 })
 
-export const setAccessToken = accessToken =>
+export const setAccessToken = (accessToken: string) =>
   localStorage.setItem("accessToken", accessToken)
 
-export const setRefreshToken = refreshToken =>
+export const setRefreshToken = (refreshToken: string) =>
   localStorage.setItem("refreshToken", refreshToken)
 
 export const clearTokens = () => {

@@ -1,4 +1,14 @@
-export const getPosition = (menu, toggle) => {
+export type Position = {
+  bottom?: string
+  top?: string
+  left?: string
+  right?: string
+  "max-height"?: string
+  "min-width"?: string
+  "max-width"?: string
+}
+
+export const getPosition = (menu: Element, toggle: Element): Position => {
   const tRect = toggle.getBoundingClientRect()
   const mRect = menu.getBoundingClientRect()
   const openUpwards = tRect.top + tRect.height / 2 > window.innerHeight / 2

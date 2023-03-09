@@ -1,7 +1,14 @@
 import styled, { css } from "styled-components/macro"
 import { theme } from "theme"
 
-export const DayWrap = styled.div`
+type DayWrapProps = {
+  outside: boolean
+  today: boolean
+  active: boolean
+  blocked?: boolean
+}
+
+export const DayWrap = styled.div<DayWrapProps>`
   font-size: 1.2rem;
   color: #333;
   height: 3.2rem;
@@ -21,7 +28,7 @@ export const DayWrap = styled.div`
   ${p =>
     p.today &&
     css`
-      background: ${theme.color.lightgrey};
+      background: ${theme.color.border};
 
       &:hover {
         background: #ffe8dc;

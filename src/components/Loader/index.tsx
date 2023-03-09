@@ -1,6 +1,10 @@
-
+import { FC } from "react"
 import { StyledLoader } from "./styled"
 
-export const Loader = ({ fulllscreen }) => (
-  <StyledLoader fulllscreen={fulllscreen}>loading</StyledLoader>
+type LoaderProps = {
+  fullscreen?: boolean
+}
+
+export const Loader: FC<LoaderProps> = ({ fullscreen }) => (
+  <StyledLoader fullscreen={fullscreen}>loading</StyledLoader>
 )

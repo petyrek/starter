@@ -1,5 +1,3 @@
-import * as R from "ramda"
-
 export type CalendarMode = "month" | "year" | "decade"
 
 export const modes = {

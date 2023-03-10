@@ -2,7 +2,7 @@ import { Loader } from "components/Loader"
 import { ErrorDetail } from "components/ErrorBoundary/ErrorDetail"
 import { useData } from "hooks/useData"
 import { Observable } from "rxjs"
-import { FC, ReactNode } from "react"
+import { ReactNode } from "react"
 
 type Props<T> = {
   stream$: Observable<T>

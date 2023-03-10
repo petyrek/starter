@@ -1,23 +1,17 @@
+import { Token } from "data/_generated"
 import { BehaviorSubject } from "rxjs"
-import {
-  getTokensFromStorage,
-  setAccessToken,
-  setRefreshToken,
-  clearTokens,
-} from "./storage"
-import { PartialTokens, Tokens } from "./types"
+import { getTokensFromStorage, persistTokens, clearTokens } from "./storage"
 
-export const loggedIn$ = new BehaviorSubject<PartialTokens>(
+export const loggedIn$ = new BehaviorSubject<Token | null>(
   getTokensFromStorage(),
 )
 
-export const login = ({ accessToken, refreshToken }: Tokens) => {
-  setAccessToken(accessToken)
-  setRefreshToken(refreshToken)
-  loggedIn$.next({ accessToken, refreshToken })
+export const login = (tokens: Token) => {
+  persistTokens(tokens)
+  loggedIn$.next(tokens)
 }
 
 export const logout = () => {
   clearTokens()
-  loggedIn$.next({ accessToken: null, refreshToken: null })
+  loggedIn$.next(null)
 }

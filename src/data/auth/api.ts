@@ -1,13 +1,8 @@
 import { post, get } from "common/request"
-import { Tokens } from "./types"
-
-export type LoginData = {
-  email: string
-  password: string
-}
+import { UserLogin, Token } from "data/_generated"
 
 export const authRequest = {
-  login: (data: LoginData) => post<Tokens, LoginData>("auth/login", data),
-  register: (data: LoginData) => post<Tokens, LoginData>("auth/register", data),
-  user: () => get<never, Tokens>("auth/info"),
+  login: (data: UserLogin) => post<Token, UserLogin>("auth/login", data),
+  register: (data: UserLogin) => post<Token, UserLogin>("auth/register", data),
+  user: () => get<never, Token>("auth/info"),
 }

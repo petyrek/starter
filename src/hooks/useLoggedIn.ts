@@ -3,11 +3,11 @@ import { getTokensFromStorage } from "data/auth/storage"
 import { useEffect, useState } from "react"
 
 export const useLoggedIn = () => {
-  const [loggedIn, setLoggedIn] = useState(!!getTokensFromStorage().accessToken)
+  const [loggedIn, setLoggedIn] = useState(!!getTokensFromStorage())
 
   useEffect(() => {
     loggedIn$.subscribe(x => {
-      setLoggedIn(!!x.accessToken)
+      setLoggedIn(!!x)
     })
   }, [])
 

@@ -1,17 +1,20 @@
-import { PartialTokens } from "./types"
+import { Token } from "data/_generated"
 
-export const getTokensFromStorage = (): PartialTokens => ({
-  accessToken: localStorage.getItem("accessToken"),
-  refreshToken: localStorage.getItem("refreshToken"),
-})
+const storageKey = "token"
 
-export const setAccessToken = (accessToken: string) =>
-  localStorage.setItem("accessToken", accessToken)
+export const getTokensFromStorage = (): Token | null => {
+  const serialized = localStorage.getItem(storageKey)
 
-export const setRefreshToken = (refreshToken: string) =>
-  localStorage.setItem("refreshToken", refreshToken)
+  if (!serialized) return null
+
+  const decoded: Token = JSON.parse(serialized)
+
+  return decoded
+}
+
+export const persistTokens = (tokens: Token) =>
+  localStorage.setItem(storageKey, JSON.stringify(tokens))
 
 export const clearTokens = () => {
-  localStorage.removeItem("accessToken")
-  localStorage.removeItem("refreshToken")
+  localStorage.removeItem(storageKey)
 }

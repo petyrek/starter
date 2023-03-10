@@ -1,6 +1,6 @@
 import { config } from "config"
-import { setAccessToken, getTokensFromStorage } from "data/auth/storage"
-import { logout } from "data/auth/rx"
+import { getTokensFromStorage } from "data/auth/storage"
+// import { logout } from "data/auth/rx"
 import { rxFetch } from "./fetch"
 import { catchError, switchMap, share, throwError, Observable } from "rxjs"
 import * as R from "ramda"
@@ -30,48 +30,50 @@ const request =
       },
       data,
       method,
-    }).pipe(
-      // @ts-expect-error TODO - why is it not typesafe
-      catchError(error => {
-        if (R.path(["response", "status"], error) === 401) {
-          if (!refresh$) {
-            refresh$ = rxFetch<RefreshResponse, RefreshData>({
-              url: config.apiRoot + "auth/refresh",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              data: { refreshToken: tokens.refreshToken },
-              method: "post",
-            }).pipe(share())
-          }
+    })
 
-          return refresh$.pipe(
-            switchMap(refreshResponse => {
-              setAccessToken(refreshResponse.data)
+    // .pipe(
+    //   // @ts-expect-error TODO - why is it not typesafe
+    //   catchError(error => {
+    //     if (R.path(["response", "status"], error) === 401) {
+    //       if (!refresh$) {
+    //         refresh$ = rxFetch<RefreshResponse, RefreshData>({
+    //           url: config.apiRoot + "auth/refresh",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           },
+    //           data: { refreshToken: tokens.refreshToken },
+    //           method: "post",
+    //         }).pipe(share())
+    //       }
 
-              return rxFetch({
-                url: config.apiRoot + url,
-                // @ts-expect-error TODO - why is it not typesafe
-                selector: response => response.json(),
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${refreshResponse.data}`,
-                },
-                data: JSON.stringify(data),
-                method,
-              })
-            }),
-          )
-        }
+    //       return refresh$.pipe(
+    //         switchMap(refreshResponse => {
+    //           efreshResponse.data)
 
-        logout()
-        return throwError(error)
-      }),
-      catchError(error => {
-        logout()
-        return throwError(error)
-      }),
-    )
+    //           return rxFetch({
+    //             url: config.apiRoot + url,
+    //             // @ts-expect-error TODO - why is it not typesafe
+    //             selector: response => response.json(),
+    //             headers: {
+    //               "Content-Type": "application/json",
+    //               Authorization: `Bearer ${refreshResponse.data}`,
+    //             },
+    //             data: JSON.stringify(data),
+    //             method,
+    //           })
+    //         }),
+    //       )
+    //     }
+
+    //     logout()
+    //     return throwError(error)
+    //   }),
+    //   catchError(error => {
+    //     logout()
+    //     return throwError(error)
+    //   }),
+    // )
   }
 export const get = request("get")
 

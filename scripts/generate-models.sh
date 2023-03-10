@@ -5,7 +5,7 @@
 set -e
 
 # Generate files per swagger.json
-swagger-codegen generate -i https://api.staging.todaytoday.app/swagger/v1/swagger.json -l typescript-axios -o ./tmp-swagger
+swagger-codegen generate -i http://localhost:8000/openapi.json -l typescript-axios -o ./tmp-swagger
 
 # Copy them over to generated models directory
 mv ./tmp-swagger/models/*.ts ./src/models/generated/

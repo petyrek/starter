@@ -1,18 +1,18 @@
-import { Token } from "data/_generated"
+import { TokenResponse } from "data/_generated"
 
 const storageKey = "token"
 
-export const getTokensFromStorage = (): Token | null => {
+export const getTokensFromStorage = (): TokenResponse | null => {
   const serialized = localStorage.getItem(storageKey)
 
   if (!serialized) return null
 
-  const decoded: Token = JSON.parse(serialized)
+  const decoded: TokenResponse = JSON.parse(serialized)
 
   return decoded
 }
 
-export const persistTokens = (tokens: Token) =>
+export const persistTokens = (tokens: TokenResponse) =>
   localStorage.setItem(storageKey, JSON.stringify(tokens))
 
 export const clearTokens = () => {

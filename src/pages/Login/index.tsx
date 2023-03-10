@@ -6,7 +6,7 @@ import { Button } from "components/Button"
 import { emailRequired, stringRequired } from "validators"
 import { FC } from "react"
 import { Field } from "components/Field"
-import { Token } from "data/_generated"
+import { TokenResponse } from "data/_generated"
 
 export const Login: FC = () => (
   <Form
@@ -16,7 +16,7 @@ export const Login: FC = () => (
     }}
     onSubmit={v => authRequest.login(v)}
     // TODO - this Tokens type should be infered
-    onSuccess={(v: Token) => login(v)}
+    onSuccess={(v: TokenResponse) => login(v)}
     initialValues={{
       email: "john@doe.com",
       password: "hunter2",

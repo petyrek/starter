@@ -2,6 +2,9 @@ import { Home } from "pages/Home"
 import { Login } from "pages/Login"
 import { NotFound } from "pages/NotFound"
 import { FC } from "react"
+import { Ingredients } from "./Ingredients"
+import { Meals } from "./Meals"
+import { Playground } from "./Playground"
 
 export type RouteType = "loggedOut" | "loggedIn" | "default"
 
@@ -25,6 +28,24 @@ export const urls = {
     path: "/login",
     url: "/login",
     type: types.loggedOut,
+  },
+  meals: {
+    component: Meals,
+    path: "/meals",
+    url: "/meals",
+    type: types.default,
+  },
+  ingredients: {
+    component: Ingredients,
+    path: "/ingredients",
+    url: "/ingredients",
+    type: types.default,
+  },
+  playground: {
+    component: Playground,
+    path: "/playground",
+    url: "/playground",
+    type: types.default,
   },
   notFound: {
     component: NotFound,

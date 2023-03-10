@@ -10,7 +10,7 @@ type TooltipProps = {
 }
 
 export const Tooltip: FC<TooltipProps> = ({ content, children }) => {
-  const { isOpen, open, close } = useOpen(true)
+  const { isOpen, open, close } = useOpen(false)
 
   return (
     <OverlayWrapper isOpen={isOpen} close={close}>

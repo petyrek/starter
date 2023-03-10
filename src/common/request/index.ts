@@ -18,12 +18,11 @@ type Method = "get" | "post" | "delete" | "put"
 
 const request =
   (method: Method) =>
-  <Data, Result>(url: string, data?: Data) => // : Observable<Result>
-  {
+  <Result, Data = {}>(url: string, data?: Data): Observable<Result> => {
     // get tokens from local storage
     const tokens = getTokensFromStorage()
 
-    return rxFetch({
+    return rxFetch<Result, Data>({
       url: config.apiRoot + url,
       headers: {
         "Content-Type": "application/json",
@@ -32,10 +31,11 @@ const request =
       data,
       method,
     }).pipe(
+      // @ts-expect-error TODO - why is it not typesafe
       catchError(error => {
         if (R.path(["response", "status"], error) === 401) {
           if (!refresh$) {
-            refresh$ = rxFetch<RefreshData, RefreshResponse>({
+            refresh$ = rxFetch<RefreshResponse, RefreshData>({
               url: config.apiRoot + "auth/refresh",
               headers: {
                 "Content-Type": "application/json",

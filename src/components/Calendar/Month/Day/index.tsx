@@ -5,7 +5,7 @@ import { FC } from "react"
 type Props = {
   day: Dayjs
   month: Dayjs
-  value: string
+  value?: string
   onChange: (v: string) => void
   noFuture?: boolean
   minDate?: Date

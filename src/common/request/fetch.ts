@@ -3,10 +3,10 @@ import { fromFetch } from "rxjs/fetch"
 
 type RxFetchProps<Data> = {
   url: string
-  data: Data
+  data?: Data
 } & RequestInit
 
-export const rxFetch = <Data, Result>({
+export const rxFetch = <Result, Data = {}>({
   url,
   data,
   ...config

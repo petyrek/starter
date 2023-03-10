@@ -1,4 +1,5 @@
 import { post, get } from "common/request"
+import { Tokens } from "./types"
 
 export type LoginData = {
   email: string
@@ -6,7 +7,7 @@ export type LoginData = {
 }
 
 export const authRequest = {
-  login: (data: LoginData) => post("auth/login", data),
-  register: (data: LoginData) => post("auth/register", data),
-  user: () => get("auth/info"),
+  login: (data: LoginData) => post<Tokens, LoginData>("auth/login", data),
+  register: (data: LoginData) => post<Tokens, LoginData>("auth/register", data),
+  user: () => get<never, Tokens>("auth/info"),
 }

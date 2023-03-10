@@ -7,7 +7,7 @@ import { PrevNextArrows } from "./PrevNextArrows"
 import { CalendarMode, modes } from "./modes"
 
 type Props = {
-  value: string
+  value?: string
   onChange: (v: string) => void
   noFuture?: boolean
   minDate?: Date

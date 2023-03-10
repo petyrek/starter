@@ -1,15 +1,20 @@
 import { FormState } from "components/Form"
 import { Label } from "components/Label"
-import { FC, ReactNode } from "react"
+import { ReactNode } from "react"
 
-type Props = {
+type Props<Values> = {
   children: ReactNode
-  form: FormState
+  form: FormState<Values>
   name: string
   label: string
 }
 
-export const Field: FC<Props> = ({ children, form, name, label }) => {
+export const Field = <Values,>({
+  children,
+  form,
+  name,
+  label,
+}: Props<Values>) => {
   const error = form?.errors[name]
   const touched = form?.touched[name]
   const showError = error && touched

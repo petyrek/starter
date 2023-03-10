@@ -1,4 +1,4 @@
-import { authRequest, LoginData } from "data/auth/api"
+import { authRequest } from "data/auth/api"
 import { login } from "data/auth/rx"
 import { Textfield } from "inputs/Textfield"
 import { Form } from "components/Form"
@@ -8,16 +8,15 @@ import { FC } from "react"
 import { Tokens } from "data/auth/types"
 import { Field } from "components/Field"
 
-type Props = {}
-
-export const Login: FC<Props> = () => (
+export const Login: FC = () => (
   <Form
     schema={{
       email: emailRequired,
       password: stringRequired,
     }}
-    onSubmit={v => authRequest.login(v as LoginData)}
-    onSuccess={v => login(v as Tokens)}
+    onSubmit={v => authRequest.login(v)}
+    // TODO - this Tokens type should be infered
+    onSuccess={(v: Tokens) => login(v)}
     initialValues={{
       email: "john@doe.com",
       password: "hunter2",
@@ -26,14 +25,11 @@ export const Login: FC<Props> = () => (
     {({ form, onChange, hasErrors }) => (
       <>
         <Field name="email" form={form} label="Email">
-          <Textfield
-            value={form.values["email"]}
-            onChange={onChange("email")}
-          />
+          <Textfield value={form.values.email} onChange={onChange("email")} />
         </Field>
         <Field name="password" form={form} label="Password">
           <Textfield
-            value={form.values["password"]}
+            value={form.values.password}
             onChange={onChange("password")}
           />
         </Field>

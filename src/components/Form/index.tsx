@@ -3,57 +3,50 @@ import { toastError } from "data/toasts/rx"
 import { Loader } from "components/Loader"
 import { noop } from "common/functions"
 import { useNavigate } from "react-router"
-import { FC, ReactNode, useState } from "react"
+import { ReactNode, useState } from "react"
 import { Observable } from "rxjs"
 import { Validator } from "validators"
 
-// TODO - derive types from Schema
 type Schema = Record<string, Validator<any>>
-type Values = Record<string, any>
-type ResultValues = Record<string, any>
 type Errors = Record<string, string>
 type Touched = Record<string, boolean>
 
-// export function mapObjIndexed<T, TResult, TKey extends string>(
-//   fn: (value: T, key: TKey, obj?: Record<TKey, T>) => TResult,
-//   obj: Record<TKey, T>,
-// ): Record<TKey, TResult>;
-
-export type FormOnChange = (k: string) => (v: any) => void
-
-export type FormState = {
+export type FormState<Values> = {
   values: Values
   errors: Errors
   touched: Touched
   isSubmitting: boolean
 }
 
-type ChildrenProps = {
-  form: FormState
-  onChange: FormOnChange
+type ChildrenProps<Values> = {
+  form: FormState<Values>
+  onChange: (k: keyof Values) => (v: any) => void
   hasErrors: boolean
 }
 
-type Props = {
+type Props<Values, Result> = {
   schema: Schema
-  onSubmit: (values: Values) => Observable<ResultValues>
-  onSuccess: (result: ResultValues) => void
-  redirect?: (result: ResultValues) => string
-  initialValues?: Values
-  children: (p: ChildrenProps) => ReactNode
+  onSubmit: (values: Values) => Observable<Result>
+  onSuccess: (result: Result) => void
+  redirect?: (result: Result) => string
+  initialValues: Values
+  children: (p: ChildrenProps<Values>) => ReactNode
 }
 
-export const Form: FC<Props> = ({
+export const Form = <Values, Result>({
   schema,
   onSubmit,
   onSuccess = noop,
   redirect,
-  initialValues = {},
+  initialValues = {} as Values,
   children,
-}) => {
-  const [form, setForm] = useState<FormState>({
+}: Props<Values, Result>) => {
+  const [form, setForm] = useState<FormState<Values>>({
     values: initialValues,
-    errors: R.mapObjIndexed((value, key) => value(initialValues[key]), schema),
+    errors: R.mapObjIndexed(
+      (value, key) => value(initialValues[key as keyof typeof initialValues]),
+      schema,
+    ),
     touched: {},
     isSubmitting: false,
   })
@@ -82,7 +75,7 @@ export const Form: FC<Props> = ({
     })
   }
 
-  const handleOnChange = (name: string) => (val: any) => {
+  const handleOnChange = (name: keyof Values) => (val: any) => {
     setForm(oldState => ({
       ...oldState,
       values: { ...oldState.values, [name]: val },

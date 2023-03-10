@@ -14,6 +14,11 @@ type ResultValues = Record<string, any>
 type Errors = Record<string, string>
 type Touched = Record<string, boolean>
 
+// export function mapObjIndexed<T, TResult, TKey extends string>(
+//   fn: (value: T, key: TKey, obj?: Record<TKey, T>) => TResult,
+//   obj: Record<TKey, T>,
+// ): Record<TKey, TResult>;
+
 export type FormOnChange = (k: string) => (v: any) => void
 
 export type FormState = {

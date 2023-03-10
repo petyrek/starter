@@ -5,7 +5,7 @@ import { startOfDecade } from "../decades"
 import { FC } from "react"
 
 type Props = {
-  onChange: (v: any) => void
+  onChange: (v: number) => void
   offset: number
 }
 

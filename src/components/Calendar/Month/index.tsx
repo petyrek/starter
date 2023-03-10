@@ -10,8 +10,8 @@ const handleOverflow = (num: number) => (num < 0 ? 6 : num)
 
 type Props = {
   month: Dayjs
-  value: any
-  onChange: (v: any) => void
+  value: string
+  onChange: (v: string) => void
   noFuture?: boolean
   minDate?: Date
   maxDate?: Date

@@ -4,7 +4,7 @@ import { months } from "../months"
 import { FC } from "react"
 
 type Props = {
-  onChange: (v: any) => void
+  onChange: (v: number) => void
   offset: number
 }
 

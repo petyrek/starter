@@ -5,8 +5,8 @@ import { FC } from "react"
 type Props = {
   day: Dayjs
   month: Dayjs
-  value: any
-  onChange: (v: any) => void
+  value: string
+  onChange: (v: string) => void
   noFuture?: boolean
   minDate?: Date
   maxDate?: Date
@@ -28,7 +28,7 @@ export const Day: FC<Props> = ({
       (maxDate && day.isAfter(maxDate)) ||
       (noFuture && day.isAfter(dayjs()))
     }
-    active={value && day.diff(dayjs(value).startOf("day"), "days") === 0}
+    active={value ? day.diff(dayjs(value).startOf("day"), "days") === 0 : false}
     today={day.diff(dayjs().startOf("day"), "days") === 0}
     outside={day.startOf("month").diff(month.startOf("month"), "months") !== 0}
   >

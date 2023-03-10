@@ -1,1 +1,1 @@
-export type SideEffect = (x: any) => void
+export type SideEffect = () => void

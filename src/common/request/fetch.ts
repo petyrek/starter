@@ -1,12 +1,16 @@
-import { switchMap, throwError } from "rxjs"
+import { Observable, switchMap, throwError } from "rxjs"
 import { fromFetch } from "rxjs/fetch"
 
-type RxFetch = {
+type RxFetchProps<Data> = {
   url: string
-  data: Object
+  data: Data
 } & RequestInit
 
-export const rxFetch = ({ url, data, ...config }: RxFetch) =>
+export const rxFetch = <Data, Result>({
+  url,
+  data,
+  ...config
+}: RxFetchProps<Data>): Observable<Result> =>
   fromFetch(url, {
     body: JSON.stringify(data),
     ...config,

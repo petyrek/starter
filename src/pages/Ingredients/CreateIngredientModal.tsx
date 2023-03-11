@@ -17,11 +17,11 @@ type Props = {
 
 const schema = {
   name: stringRequired,
-  protein: numberRequired,
-  carbohydrates: numberRequired,
-  fats: numberRequired,
-  salt: numberRequired,
-  fiber: numberRequired,
+  // protein: numberRequired,
+  // carbohydrates: numberRequired,
+  // fats: numberRequired,
+  // salt: numberRequired,
+  // fiber: numberRequired,
 }
 
 export const CreateIngredientModal: FC<Props> = ({

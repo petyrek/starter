@@ -1,11 +1,12 @@
 import styled, { css } from "styled-components/macro"
+import { theme } from "theme"
 
 type StyledLoaderProps = {
   fullscreen?: boolean
 }
 
 export const StyledLoader = styled.div<StyledLoaderProps>`
-  background: rgba(0, 0, 0, 0.5);
+  background: ${theme.color.backdrop};
   padding: 20px;
   color: white;
 

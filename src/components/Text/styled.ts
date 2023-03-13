@@ -3,8 +3,8 @@ import styled from "styled-components/macro"
 
 type OtherProps = {}
 
-export type StyledBoxProps = AllStyledProps & OtherProps
+export type StyledTextProps = AllStyledProps & OtherProps
 
-export const StyledBox = styled.div<StyledBoxProps>`
+export const StyledText = styled.p<StyledTextProps>`
   ${allStyledRules};
 `

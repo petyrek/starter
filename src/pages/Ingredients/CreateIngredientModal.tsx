@@ -1,4 +1,4 @@
-import { Textfield } from "inputs/Textfield"
+import { Textfield } from "components/Textfield"
 import { Form } from "components/Form"
 import { Button } from "components/Button"
 import { numberRequired, stringRequired } from "validators"

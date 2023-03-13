@@ -1,6 +1,6 @@
 import { authRequest } from "data/auth/api"
 import { login } from "data/auth/rx"
-import { Textfield } from "inputs/Textfield"
+import { Textfield } from "components/Textfield"
 import { Form } from "components/Form"
 import { Button } from "components/Button"
 import { emailRequired, stringRequired } from "validators"

@@ -7,4 +7,4 @@ type Props = {
   children?: ReactNode
 }
 
-export const Backdrop: FC<Props> = p => <StyledBackdrop {...p} />
+export const Backdrop: FC<Props> = ({ children, onClick }) => <StyledBackdrop onClick={onClick}>{children}</StyledBackdrop>

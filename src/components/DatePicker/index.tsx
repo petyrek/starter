@@ -3,7 +3,7 @@ import { OverlayWrapper } from "components/OverlayWrapper"
 import { useOpen } from "hooks/useOpen"
 import { ContextMenu } from "components/ContextMenu"
 import { Calendar } from "components/Calendar"
-import { Textfield } from "inputs/Textfield"
+import { Textfield } from "components/Textfield"
 import { FC } from "react"
 import { noop } from "common/functions"
 

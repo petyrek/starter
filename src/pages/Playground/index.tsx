@@ -1,7 +1,7 @@
 import { Page } from "components/Page"
 import { Button } from "components/Button"
 import { toastError, toastWarning, toastSuccess } from "data/toasts/rx"
-import { DatePicker } from "inputs/DatePicker"
+import { DatePicker } from "components/DatePicker"
 import { Tooltip } from "components/Tooltip"
 import { FC, useState } from "react"
 import { Box } from "components/Box"

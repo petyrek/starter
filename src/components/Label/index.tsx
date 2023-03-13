@@ -1,5 +1,7 @@
+import { Text } from "components/Text"
 import { FC, ReactNode } from "react"
-import { LabelWrapper, LabelText, LabelError } from "./styled"
+import { theme } from "theme"
+import { LabelWrapper } from "./styled"
 
 type Props = {
   label?: string
@@ -9,8 +11,8 @@ type Props = {
 
 export const Label: FC<Props> = ({ label, children, error }) => (
   <LabelWrapper>
-    {label && <LabelText>{label}</LabelText>}
+    {label && <Text>{label}</Text>}
     {children}
-    {error && <LabelError>{error}</LabelError>}
+    {error && <Text color={theme.color.error}>{error}</Text>}
   </LabelWrapper>
 )

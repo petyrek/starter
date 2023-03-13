@@ -6,8 +6,26 @@ export type StyledButtonProps = {
   error?: boolean
 }
 
-// TODO
-const darken = (amount: number, color: string): string => color
+const darken = (hexColor: string, amount: number): string => {
+  // Remove the "#" from the hex color string
+  hexColor = hexColor.replace("#", "")
+
+  // Convert the hex color string to RGB values
+  const r = parseInt(hexColor.substring(0, 2), 16)
+  const g = parseInt(hexColor.substring(2, 4), 16)
+  const b = parseInt(hexColor.substring(4, 6), 16)
+
+  // Calculate the new RGB values based on the given amount
+  const newR = Math.max(0, Math.round(r * (1 - amount)))
+  const newG = Math.max(0, Math.round(g * (1 - amount)))
+  const newB = Math.max(0, Math.round(b * (1 - amount)))
+
+  // Convert the new RGB values back to a hex color string
+  const newHexColor =
+    "#" + ((1 << 24) + (newR << 16) + (newG << 8) + newB).toString(16).slice(1)
+
+  return newHexColor
+}
 
 const getBackground = (p: StyledButtonProps) => {
   if (p.secondary) return theme.color.secondary
@@ -28,7 +46,7 @@ const getTheme = (p: StyledButtonProps) => {
     color: ${getColor(p)};
 
     &:hover {
-      background: ${darken(0.05, bg)};
+      background: ${darken(bg, 0.05)};
     }
   `
 }

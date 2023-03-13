@@ -1,24 +1,37 @@
 import { Portal } from "components/Portal"
 import { fromEvent } from "rxjs"
+import { useScrollLock } from "hooks/useScrollLock"
 import { throunceTime } from "common/rxjs"
-import { ContextMenuWrap } from "./styled"
+import { ContextMenuWrap, ContextToggleWrap } from "./styled"
 import { getPosition, Position } from "./helpers"
 import { FC, ReactNode, useEffect, useRef, useState } from "react"
+import { useOpen, UseOpenProps } from "hooks/useOpen"
+import { useClickOutside } from "hooks/useClickOutside"
+
+type ElementProps = UseOpenProps
 
 type Props = {
-  children: ReactNode
-  isOpen: boolean
+  toggleElement: (p: ElementProps) => ReactNode
+  menuContent: (p: ElementProps) => ReactNode
 }
 
-export const ContextMenu: FC<Props> = ({ children, isOpen }) => {
+export const ContextMenu: FC<Props> = ({ toggleElement, menuContent }) => {
+  const useOpenProps = useOpen()
+  const { isOpen, close } = useOpenProps
+
+  useScrollLock(isOpen)
+
   const [position, setPosition] = useState<Position>({})
-  const ref = useRef<HTMLElement | null>(null)
+  const menuRef = useRef<HTMLDivElement | null>(null)
+  const toggleRef = useRef<HTMLDivElement | null>(null)
+
+  useClickOutside(close, [menuRef, toggleRef])
 
   const setup = () => {
     if (!isOpen) return
 
-    const menu = ref.current
-    const toggle = menu && menu.closest(".overlay-wrapper-content")
+    const menu = menuRef.current
+    const toggle = toggleRef.current
 
     if (!menu || !toggle) return
 
@@ -46,17 +59,18 @@ export const ContextMenu: FC<Props> = ({ children, isOpen }) => {
     }
   }, []) // eslint-disable-line
 
-  if (!isOpen) return null
-
   return (
-    <div
-      ref={r => {
-        ref.current = r
-      }}
-    >
-      <Portal>
-        <ContextMenuWrap position={position}>{children}</ContextMenuWrap>
-      </Portal>
-    </div>
+    <>
+      <ContextToggleWrap isOpen={isOpen} ref={toggleRef}>
+        {toggleElement(useOpenProps)}
+      </ContextToggleWrap>
+      {isOpen && (
+        <Portal>
+          <ContextMenuWrap ref={menuRef} position={position}>
+            {menuContent(useOpenProps)}
+          </ContextMenuWrap>
+        </Portal>
+      )}
+    </>
   )
 }

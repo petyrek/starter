@@ -5,14 +5,13 @@ export const DecadeWrap = styled.div`
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  width: 300px;
+
+  & > * {
+    width: calc(100% / 3);
+  }
 `
 
 export const StyledDecade = styled.div`
-  font-size: 12px;
-  color: ${theme.color.darkgrey};
-  width: 100px;
-  height: 50px;
   line-height: 50px;
   cursor: pointer;
 

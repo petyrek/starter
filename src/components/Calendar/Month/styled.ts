@@ -8,9 +8,6 @@ export const Week = styled.div`
   display: flex;
   text-transform: capitalize;
 
-  &:first-child {
-    margin-bottom: 5px;
-  }
   & > * {
     width: calc(100% / 7);
   }

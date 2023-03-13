@@ -2,9 +2,9 @@ import { Page } from "components/Page"
 import { Button } from "components/Button"
 import { toastError, toastWarning, toastSuccess } from "data/toasts/rx"
 import { DatePicker } from "components/DatePicker"
-import { Tooltip } from "components/Tooltip"
 import { FC, useState } from "react"
 import { Box } from "components/Box"
+import { ButtonModal } from "components/ButtonModal"
 
 type Props = {}
 
@@ -23,14 +23,147 @@ export const Playground: FC<Props> = () => {
         <DatePicker value={v} onChange={setV} />
       </Box>
 
-      <h1>tooltip</h1>
-      <Box border="1px solid blue">
-        <Box border="1px solid red" m={20}>
-          <Tooltip content={<span>custom tooltip ex</span>}>
-            <div>tooltip example</div>
-          </Tooltip>
-        </Box>
-      </Box>
+      <ButtonModal
+        text="create"
+        title="create ingredient"
+        renderModal={() => (
+          <ul>
+            <li>dshjksdhjksdhjk</li>
+            <li>dshjksdhjksdhjk</li>
+          </ul>
+        )}
+      />
+      <ul>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+        <li>dshjksdhjksdhjk</li>
+      </ul>
     </Page>
   )
 }

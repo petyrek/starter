@@ -19,7 +19,11 @@ export const PrevNextArrows: FC<Props> = ({
   setMode,
 }) => (
   <PrevNextArrowsWrap>
-    <Icon rotate="1" icon={ArrowRight} onClick={() => setOffset(offset - 1)} />
+    <Icon
+      rotate={180}
+      icon={ArrowRight}
+      onClick={() => setOffset(offset - 1)}
+    />
     <Title
       onClick={() => {
         const next = calculateHigherModeAndOffset(mode, offset)

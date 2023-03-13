@@ -1,6 +1,22 @@
-import styled from "styled-components/macro"
+import styled, { css } from "styled-components/macro"
 import { theme } from "theme"
 import { Position } from "./helpers"
+
+type ContextToggleWrapProps = {
+  isOpen: boolean
+}
+
+export const ContextToggleWrap = styled.div<ContextToggleWrapProps>`
+  position: relative;
+  cursor: pointer;
+
+  ${p =>
+    p.isOpen &&
+    css`
+      position: relative;
+      z-index: ${theme.zIndices.overlayWrapper};
+    `};
+`
 
 type ContextMenuWrapProps = {
   position: Position

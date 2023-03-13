@@ -5,6 +5,7 @@ import { Year } from "./Year"
 import { Decade } from "./Decade"
 import { PrevNextArrows } from "./PrevNextArrows"
 import { CalendarMode, modes } from "./modes"
+import { Box } from "components/Box"
 
 type Props = {
   value?: string
@@ -29,7 +30,7 @@ export const Calendar: FC<Props> = ({
   )
 
   return (
-    <>
+    <Box maxW={300}>
       <PrevNextArrows
         offset={offset}
         setOffset={setOffset}
@@ -64,6 +65,6 @@ export const Calendar: FC<Props> = ({
           noFuture={noFuture}
         />
       )}
-    </>
+    </Box>
   )
 }

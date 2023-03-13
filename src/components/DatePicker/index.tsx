@@ -1,6 +1,4 @@
 import dayjs from "dayjs"
-import { OverlayWrapper } from "components/OverlayWrapper"
-import { useOpen } from "hooks/useOpen"
 import { ContextMenu } from "components/ContextMenu"
 import { Calendar } from "components/Calendar"
 import { Textfield } from "components/Textfield"
@@ -13,17 +11,16 @@ type Props = {
 }
 
 export const DatePicker: FC<Props> = ({ value, onChange }) => {
-  const { isOpen, toggle, close } = useOpen()
-
   return (
-    <OverlayWrapper isOpen={isOpen} close={close}>
-      <div onClick={toggle}>
+    <ContextMenu
+      toggleElement={({ toggle }) => (
         <Textfield
+          onClick={toggle}
           value={dayjs(value).format("DD. MM. YYYY")}
           onChange={noop}
         />
-      </div>
-      <ContextMenu isOpen={isOpen}>
+      )}
+      menuContent={({ close }) => (
         <Calendar
           onChange={v => {
             onChange(v)
@@ -31,7 +28,7 @@ export const DatePicker: FC<Props> = ({ value, onChange }) => {
           }}
           value={value}
         />
-      </ContextMenu>
-    </OverlayWrapper>
+      )}
+    />
   )
 }

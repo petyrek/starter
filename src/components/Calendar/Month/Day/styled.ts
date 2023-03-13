@@ -9,14 +9,12 @@ type DayWrapProps = {
 }
 
 export const DayWrap = styled.div<DayWrapProps>`
-  font-size: 12px;
   color: ${theme.color.darkgrey};
-  height: 32px;
-  line-height: px;
+  line-height: 32px;
   cursor: pointer;
 
   &:hover {
-    background: ${theme.color.error};
+    background: ${theme.color.warning};
   }
 
   ${p =>
@@ -38,10 +36,10 @@ export const DayWrap = styled.div<DayWrapProps>`
   ${p =>
     p.active &&
     css`
-      background: ${theme.color.primary}
+      background: ${theme.color.primary};
       color: #fff;
       &:hover {
-        background: ${theme.color.primary}
+        background: ${theme.color.primary};
         color: #fff;
       }
     `};

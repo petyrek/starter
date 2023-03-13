@@ -14,6 +14,4 @@ run the script
 
 refine:
 
-- Calendar
-- ContextMenu
-- Tooltip
+- ContextMenu helpers

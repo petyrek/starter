@@ -5,6 +5,7 @@ import { Icon } from "components/Icon"
 import { Cross } from "icons/Cross"
 import { FC, ReactNode } from "react"
 import { SideEffect } from "common/types"
+import { useScrollLock } from "hooks/useScrollLock"
 
 type Props = {
   children: ReactNode
@@ -12,18 +13,22 @@ type Props = {
   title: string
 }
 
-export const Modal: FC<Props> = ({ children, close, title }) => (
-  <Portal>
-    <Backdrop onClick={close}>
-      <ModalWindow onClick={e => e.stopPropagation()}>
-        {title && (
-          <ModalTitle>
-            {title}
-            <Icon icon={Cross} onClick={close} />
-          </ModalTitle>
-        )}
-        <ModalBody>{children}</ModalBody>
-      </ModalWindow>
-    </Backdrop>
-  </Portal>
-)
+export const Modal: FC<Props> = ({ children, close, title }) => {
+  useScrollLock(true)
+
+  return (
+    <Portal>
+      <Backdrop onClick={close}>
+        <ModalWindow onClick={e => e.stopPropagation()}>
+          {title && (
+            <ModalTitle>
+              {title}
+              <Icon icon={Cross} onClick={close} />
+            </ModalTitle>
+          )}
+          <ModalBody>{children}</ModalBody>
+        </ModalWindow>
+      </Backdrop>
+    </Portal>
+  )
+}

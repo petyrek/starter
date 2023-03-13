@@ -1,21 +1,22 @@
 import styled from "styled-components/macro"
+import { theme } from "theme"
 
 export const DecadeWrap = styled.div`
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  width: 30rem;
+  width: 300px;
 `
 
 export const StyledDecade = styled.div`
-  font-size: 1.2rem;
-  color: #333;
-  width: 10rem;
-  height: 5rem;
-  line-height: 5rem;
+  font-size: 12px;
+  color: ${theme.color.darkgrey};
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
   cursor: pointer;
 
   &:hover {
-    background: #eee;
+    background: ${theme.color.border};
   }
 `

@@ -8,12 +8,15 @@ const breakpoints = {
 export const theme = {
   color: {
     darkgrey: "#333",
+    grey: "#666",
+    lightGrey: "#999",
     border: "#f5f5f5",
     primary: "orange",
     secondary: "blue",
     success: "green",
     warning: "yellow",
     error: "red",
+    backdrop: "rgba(0, 0, 0, 0.3)",
   },
   zIndices: {
     backdrop: 1,

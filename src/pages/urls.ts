@@ -9,7 +9,7 @@ import { Playground } from "./Playground"
 export type RouteType = "loggedOut" | "loggedIn" | "default"
 
 type UrlsObject = {
-  component: FC<{}>
+  component: FC
   path: string
   url: string
   type: RouteType
@@ -53,4 +53,4 @@ export const urls = {
     url: "/not-found",
     type: types.default,
   },
-} satisfies Record<string, UrlsObject>
+} as const satisfies Record<string, UrlsObject>

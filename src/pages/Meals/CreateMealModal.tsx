@@ -7,8 +7,6 @@ import { Field } from "components/Field"
 import { mealRequest } from "data/meal/api"
 import { SideEffect } from "common/types"
 import { MealResponse } from "data/_generated"
-import { Data } from "components/Data"
-import { ingredientRequest } from "data/ingredient/api"
 
 type Props = {
   close: SideEffect
@@ -17,18 +15,15 @@ type Props = {
 }
 
 export const CreateMealModal: FC<Props> = ({ meal, close, refetch }) => (
-  <Data stream$={ingredientRequest.list()}>
-    {({ data }) => (
       <Form
         schema={{
           name: stringRequired,
           // process: stringRequired,
         }}
         onSubmit={v => {
-          console.log(data[0])
           return meal
-            ? mealRequest.edit(meal.id, { ...v, ingredientIds: [data[0].id] })
-            : mealRequest.create({ ...v, ingredientIds: [data[0].id] })
+            ? mealRequest.edit(meal.id, v)
+            : mealRequest.create(v)
         }}
         // TODO - this Tokens type should be infered
         onSuccess={() => {
@@ -57,6 +52,4 @@ export const CreateMealModal: FC<Props> = ({ meal, close, refetch }) => (
           </>
         )}
       </Form>
-    )}
-  </Data>
 )

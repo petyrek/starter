@@ -9,7 +9,7 @@ export const Week = styled.div`
   text-transform: capitalize;
 
   &:first-child {
-    margin-bottom: 0.5rem;
+    margin-bottom: 5px;
   }
   & > * {
     width: calc(100% / 7);

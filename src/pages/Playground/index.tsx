@@ -4,8 +4,11 @@ import { toastError, toastWarning, toastSuccess } from "data/toasts/rx"
 import { DatePicker } from "inputs/DatePicker"
 import { Tooltip } from "components/Tooltip"
 import { FC, useState } from "react"
+import { Box } from "components/Box"
 
-export const Playground: FC = () => {
+type Props = {}
+
+export const Playground: FC<Props> = () => {
   const [v, setV] = useState<string>()
 
   return (
@@ -16,12 +19,18 @@ export const Playground: FC = () => {
       <Button error text="error" onClick={() => toastError("ololol")} />
 
       <h1>datepicker</h1>
-      <DatePicker value={v} onChange={setV} />
+      <Box border="1px solid red" m={20}>
+        <DatePicker value={v} onChange={setV} />
+      </Box>
 
       <h1>tooltip</h1>
-      <Tooltip content={<span>custom tooltip ex</span>}>
-        <div>tooltip example</div>
-      </Tooltip>
+      <Box border="1px solid blue">
+        <Box border="1px solid red" m={20}>
+          <Tooltip content={<span>custom tooltip ex</span>}>
+            <div>tooltip example</div>
+          </Tooltip>
+        </Box>
+      </Box>
     </Page>
   )
 }

@@ -2,14 +2,14 @@ import styled from "styled-components/macro"
 import { theme } from "theme"
 
 export const StyledInput = styled.input`
-  background: none;
+  background: white;
   color: ${theme.color.darkgrey};
-  font-size: 1.6rem;
-  height: 4rem;
+  font-size: 16px;
+  height: 40px;
   border: none;
-  padding: 0 1rem;
+  padding: 0 10px;
   width: 100%;
-  border-bottom: 0.1rem solid ${theme.color.border};
-  border-radius: 0rem;
-  -webkit-border-radius: 0rem;
+  border-bottom: 1px solid ${theme.color.border};
+  border-radius: 0;
+  -webkit-border-radius: 0;
 `

@@ -5,9 +5,9 @@ import { FC } from "react"
 import { urls } from "pages/urls"
 import { Link } from "components/Link"
 
-type HeaderProps = {}
+type Props = {}
 
-export const Header: FC<HeaderProps> = () => (
+export const Header: FC<Props> = () => (
   <StyledHeader>
     <ul>
       <li>

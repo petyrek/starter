@@ -1,11 +1,12 @@
 import styled from "styled-components/macro"
+import { theme } from "theme"
 
 export const LabelWrapper = styled.label`
-  color: #666;
+  color: ${theme.color.grey};
 `
 
 export const LabelText = styled.p``
 
 export const LabelError = styled.p`
-  color: red;
+  color: ${theme.color.error};
 `

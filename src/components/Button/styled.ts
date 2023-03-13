@@ -34,11 +34,11 @@ const getTheme = (p: StyledButtonProps) => {
 }
 
 export const StyledButton = styled.button`
-  height: 3.5rem;
-  padding: 0 1.5rem;
-  border-radius: 0.4rem;
+  height: 35px;
+  padding: 0 15px;
+  border-radius: 4px;
   border: none;
-  font-size: 1.6rem;
+  font-size: 16px;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;

@@ -4,7 +4,9 @@ import { ToastNotifications } from "./ToastNotifications"
 import { GlobalStyle } from "./GlobalStyle"
 import { ErrorBoundary } from "components/ErrorBoundary"
 
-export const App: FC = () => (
+type Props = {}
+
+export const App: FC<Props> = () => (
   <ErrorBoundary>
     <GlobalStyle />
     <AppRoutes />

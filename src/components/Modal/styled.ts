@@ -3,7 +3,7 @@ import styled from "styled-components/macro"
 export const ModalWindow = styled.div`
   background: #fff;
   width: calc(100% - 1.7rem);
-  max-width: 40rem;
+  max-width: 40px;
 `
 
 export const ModalTitle = styled.div`
@@ -12,5 +12,5 @@ export const ModalTitle = styled.div`
   align-items: center;
 `
 export const ModalBody = styled.div`
-  padding: 1.5rem;
+  padding: 15px;
 `

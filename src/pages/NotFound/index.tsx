@@ -1,5 +1,7 @@
 import { FC } from "react"
 
-export const NotFound: FC = () => {
+type Props = {}
+
+export const NotFound: FC<Props> = () => {
   return <div>not found</div>
 }

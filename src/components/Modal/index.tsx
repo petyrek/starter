@@ -6,7 +6,7 @@ import { Cross } from "icons/Cross"
 import { FC, ReactNode } from "react"
 import { SideEffect } from "common/types"
 
-export type Props = {
+type Props = {
   children: ReactNode
   close: SideEffect
   title: string

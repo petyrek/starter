@@ -4,13 +4,13 @@ import { Backdrop } from "components/Backdrop"
 import { SideEffect } from "common/types"
 import { FC, ReactNode } from "react"
 
-type OverlayWrapperProps = {
+type Props = {
   isOpen: boolean
   close: SideEffect
   children: ReactNode
 }
 
-export const OverlayWrapper: FC<OverlayWrapperProps> = ({
+export const OverlayWrapper: FC<Props> = ({
   isOpen,
   close,
   children,

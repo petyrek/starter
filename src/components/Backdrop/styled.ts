@@ -11,5 +11,6 @@ export const StyledBackdrop = styled.div`
   align-items: center;
   justify-content: center;
   z-index: ${theme.zIndices.backdrop};
-  background: rgba(0, 0, 0, 0.3);
+  background: ${theme.color.backdrop};
 `
+

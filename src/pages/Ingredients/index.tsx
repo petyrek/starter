@@ -8,7 +8,9 @@ import { Modal } from "components/Modal"
 import { Submit } from "components/Submit"
 import { Empty } from "components/Empty"
 
-export const Ingredients: FC = () => {
+type Props = {}
+
+export const Ingredients: FC<Props> = () => {
   const [openId, setOpenId] = useState<number | null>()
 
   return (

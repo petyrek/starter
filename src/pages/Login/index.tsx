@@ -8,7 +8,9 @@ import { FC } from "react"
 import { Field } from "components/Field"
 import { TokenResponse } from "data/_generated"
 
-export const Login: FC = () => (
+type Props = {}
+
+export const Login: FC<Props> = () => (
   <Form
     schema={{
       email: emailRequired,

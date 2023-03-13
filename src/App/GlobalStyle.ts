@@ -11,7 +11,6 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-size: 16px;
-    font-size: 1.6rem;
     margin: 0;
     font-family: sans-serif;
     color: ${theme.color.darkgrey}

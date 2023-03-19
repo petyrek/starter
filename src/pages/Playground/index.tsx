@@ -5,10 +5,9 @@ import { DatePicker } from "components/DatePicker"
 import { FC, useState } from "react"
 import { Box } from "components/Box"
 import { ButtonModal } from "components/ButtonModal"
+import { PageProps } from "pages/urls"
 
-type Props = {}
-
-export const Playground: FC<Props> = () => {
+export const Playground: FC<PageProps> = () => {
   const [v, setV] = useState<string>()
 
   return (

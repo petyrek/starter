@@ -17,11 +17,11 @@ type Props = {
 
 const schema = {
   name: stringRequired,
-  // protein: numberRequired,
-  // carbohydrates: numberRequired,
-  // fats: numberRequired,
-  // salt: numberRequired,
-  // fiber: numberRequired,
+  protein: numberRequired,
+  carbohydrates: numberRequired,
+  fats: numberRequired,
+  salt: numberRequired,
+  fiber: numberRequired,
 }
 
 export const CreateIngredientModal: FC<Props> = ({
@@ -36,7 +36,6 @@ export const CreateIngredientModal: FC<Props> = ({
         ? ingredientRequest.edit(ingredient.id, v)
         : ingredientRequest.create(v)
     }
-    // TODO - this Tokens type should be infered
     onSuccess={() => {
       close()
       refetch()

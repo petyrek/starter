@@ -8,8 +8,10 @@ import { Playground } from "./Playground"
 
 export type RouteType = "loggedOut" | "loggedIn" | "default"
 
+export type PageProps = {}
+
 type UrlsObject = {
-  component: FC
+  component: FC<PageProps>
   path: string
   url: string
   type: RouteType

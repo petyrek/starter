@@ -7,10 +7,9 @@ import { emailRequired, stringRequired } from "validators"
 import { FC } from "react"
 import { Field } from "components/Field"
 import { TokenResponse } from "data/_generated"
+import { PageProps } from "pages/urls"
 
-type Props = {}
-
-export const Login: FC<Props> = () => (
+export const Login: FC<PageProps> = () => (
   <Form
     schema={{
       email: emailRequired,

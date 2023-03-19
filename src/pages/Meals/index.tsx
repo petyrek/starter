@@ -7,15 +7,14 @@ import { CreateMealModal } from "./CreateMealModal"
 import { Modal } from "components/Modal"
 import { Empty } from "components/Empty"
 import { Submit } from "components/Submit"
+import { PageProps } from "pages/urls"
 
-type Props = {}
-
-export const Meals: FC<Props> = () => {
+export const Meals: FC<PageProps> = () => {
   const [openId, setOpenId] = useState<number | null>()
 
   return (
     <Page>
-      <Data stream$={mealRequest.list()}>
+      <Data getStream={() => mealRequest.list()}>
         {({ data, refetch }) => (
           <>
             <h1>meals</h1>
@@ -26,7 +25,7 @@ export const Meals: FC<Props> = () => {
                     <strong>{x.name}</strong>
                     <em>{JSON.stringify(x)}</em>
                     <button onClick={() => setOpenId(x.id)}>detail</button>
-                    <Submit stream$={mealRequest.del(x.id)}>
+                    <Submit getStream={() => mealRequest.del(x.id)}>
                       {({ submit, isSubmitting }) => (
                         <button
                           onClick={() => submit(refetch)}

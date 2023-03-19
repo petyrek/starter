@@ -2,12 +2,15 @@ import { SideEffect } from "common/types"
 import { useEffect, useState } from "react"
 import { Observable } from "rxjs"
 
-export const useData = <T>(stream$: Observable<T>, refetchParams = []) => {
+export const useData = <T>(
+  getStream: () => Observable<T>,
+  refetchParams = [],
+) => {
   const [data, setData] = useState<T>()
   const [error, setError] = useState()
 
   const refetch: SideEffect = () => {
-    stream$.subscribe({
+    getStream().subscribe({
       next: setData,
       error: setError,
     })

@@ -7,15 +7,14 @@ import { CreateIngredientModal } from "./CreateIngredientModal"
 import { Modal } from "components/Modal"
 import { Submit } from "components/Submit"
 import { Empty } from "components/Empty"
+import { PageProps } from "pages/urls"
 
-type Props = {}
-
-export const Ingredients: FC<Props> = () => {
+export const Ingredients: FC<PageProps> = () => {
   const [openId, setOpenId] = useState<number | null>()
 
   return (
     <Page>
-      <Data stream$={ingredientRequest.list()}>
+      <Data getStream={() => ingredientRequest.list()}>
         {({ data, refetch }) => (
           <>
             <h1>ingredients</h1>
@@ -25,7 +24,7 @@ export const Ingredients: FC<Props> = () => {
                   <li key={x.id}>
                     <strong>{x.name}</strong>
                     <button onClick={() => setOpenId(x.id)}>detail</button>
-                    <Submit stream$={ingredientRequest.del(x.id)}>
+                    <Submit getStream={() => ingredientRequest.del(x.id)}>
                       {({ submit, isSubmitting }) => (
                         <button
                           onClick={() => submit(refetch)}

@@ -1,10 +1,8 @@
 import { TokenResponse } from "data/_generated"
-import { BehaviorSubject } from "rxjs"
-import { getTokensFromStorage, persistTokens, clearTokens } from "./storage"
+import { Subject } from "rxjs"
+import { persistTokens, clearTokens } from "./storage"
 
-export const loggedIn$ = new BehaviorSubject<TokenResponse | null>(
-  getTokensFromStorage(),
-)
+export const loggedIn$ = new Subject<TokenResponse | null>()
 
 export const login = (tokens: TokenResponse) => {
   persistTokens(tokens)

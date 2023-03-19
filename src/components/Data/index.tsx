@@ -12,19 +12,19 @@ type ChildrenProps<T> = {
 }
 
 type Props<T> = {
-  stream$: Observable<T>
+  getStream: () => Observable<T>
   children: (p: ChildrenProps<T>) => ReactNode
   loadingRenderer?: () => ReactNode
   errorRenderer?: (error: Error) => ReactNode
 }
 
 export const Data = <T,>({
-  stream$,
+  getStream,
   children,
   loadingRenderer = () => <Loader />,
   errorRenderer = (error: Error) => <ErrorDetail error={error} />,
 }: Props<T>) => {
-  const { data, setData, error, refetch } = useData(stream$)
+  const { data, setData, error, refetch } = useData(getStream)
 
   if (error) {
     return <>{errorRenderer(error)}</>

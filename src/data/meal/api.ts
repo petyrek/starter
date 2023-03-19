@@ -6,9 +6,9 @@ import { MealBody, MealResponse } from "data/_generated"
 
 export const mealRequest = {
   list: () => get<MealResponse[]>("meal"),
-  detail: (id: number) => get<MealResponse>(`meal/${id}`),
+  detail: (id: number) => get<MealResponse>(`/meal/${id}`),
   del: (id: number) => del(`meal/${id}`),
-  create: (data: MealBody) => post<MealResponse, MealBody>(`meal`, data),
+  create: (data: MealBody) => post<MealResponse, MealBody>(`/meal`, data),
   edit: (id: number, data: MealBody) =>
-    put<MealResponse, MealBody>(`meal/${id}`, data),
+    put<MealResponse, MealBody>(`/meal/${id}`, data),
 } as const

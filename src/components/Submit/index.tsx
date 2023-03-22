@@ -8,12 +8,12 @@ type ChildrenProps<T> = {
 }
 
 type Props<T> = {
-  stream$: Observable<T>
+  getStream: () => Observable<T>
   children: (p: ChildrenProps<T>) => ReactNode
 }
 
-export const Submit = <T,>({ stream$, children }: Props<T>) => {
-  const { submit, isSubmitting } = useSubmit(stream$)
+export const Submit = <T,>({ getStream, children }: Props<T>) => {
+  const { submit, isSubmitting } = useSubmit(getStream)
 
   return (
     <>

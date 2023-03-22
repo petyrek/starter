@@ -1,7 +1,6 @@
+import { PageProps } from "pages/urls"
 import { FC } from "react"
 
-type Props = {}
-
-export const NotFound: FC<Props> = () => {
+export const NotFound: FC<PageProps> = () => {
   return <div>not found</div>
 }

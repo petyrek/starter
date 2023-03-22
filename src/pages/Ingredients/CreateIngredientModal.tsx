@@ -39,8 +39,7 @@ export const CreateIngredientModal: FC<Props> = ({
         ? ingredientRequest.edit(ingredient.id, v)
         : ingredientRequest.create(v)
     }
-    onSuccess={(v: IngredientResponse) => {
-      console.log(v.name)
+    onSuccess={() => {
       close()
       refetch()
     }}

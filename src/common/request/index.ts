@@ -1,12 +1,12 @@
 import { config } from "config"
 import { getTokensFromStorage } from "data/auth/storage"
-import { logout, login } from "data/auth/rx"
+import { login, logout } from "data/auth/rx"
 import { rxFetch } from "./fetch"
 import { catchError, switchMap, share, throwError, Observable } from "rxjs"
 import * as R from "ramda"
 import { TokenResponse } from "data/_generated"
 
-// will hold refresh observable
+// will hold shared refresh observable, so refresh isn't triggered multiple times
 let refresh$: Observable<TokenResponse>
 
 type Method = "get" | "post" | "delete" | "put"
@@ -26,10 +26,12 @@ const request =
       method,
     }).pipe(
       catchError(error => {
+        // we have tokens and its 401, which means token expired
         if (tokens && R.path(["response", "status"], error) === 401) {
+          // if refresh observable doesn't exist yet, create one
           if (!refresh$) {
             refresh$ = rxFetch<TokenResponse, TokenResponse>({
-              url: config.apiRoot + "auth/refresh",
+              url: config.apiRoot + "/auth/refresh",
               headers: {
                 "Content-Type": "application/json",
               },
@@ -38,6 +40,7 @@ const request =
             }).pipe(share())
           }
 
+          // after refreshing, make the request again with new tokens
           return refresh$.pipe(
             switchMap(refreshResponse => {
               login(refreshResponse)
@@ -52,17 +55,21 @@ const request =
                 method,
               })
             }),
+            // refreshing the token failed
             catchError(error => {
+              // logout on failing to refresh the token
               logout()
               return throwError(error)
             }),
           )
         }
 
+        // rethrow, we only wanted to catch 401 for expired tokens
         return throwError(error)
       }),
     )
   }
+
 export const get = request("get")
 
 export const post = request("post")

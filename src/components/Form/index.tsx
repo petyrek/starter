@@ -67,9 +67,7 @@ export const Form = <Schema extends Record<string, Validator<any>>, Result>({
       },
       error: err => {
         setForm(oldState => ({ ...oldState, isSubmitting: false }))
-        toastError(
-          R.pathOr("Unknown error", ["response", "data", "message"], err),
-        )
+        toastError(R.pathOr("Unknown error", ["detail"], err))
       },
     })
   }

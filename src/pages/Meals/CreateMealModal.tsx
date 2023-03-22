@@ -21,7 +21,14 @@ export const CreateMealModal: FC<Props> = ({ meal, close, refetch }) => (
       // process: stringRequired,
     }}
     onSubmit={v => {
-      return meal ? mealRequest.edit(meal.id, v) : mealRequest.create(v)
+      const newData = {
+        ...v,
+        // TODO
+        ingredientAmounts: [],
+      }
+      return meal
+        ? mealRequest.edit(meal.id, newData)
+        : mealRequest.create(newData)
     }}
     // TODO - this Tokens type should be infered
     onSuccess={() => {

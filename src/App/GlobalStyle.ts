@@ -5,10 +5,6 @@ import { theme } from "theme"
 export const GlobalStyle = createGlobalStyle`
   ${normalize};
 
-  html { 
-    font-size: 62.5%; 
-  }
-
   body {
     font-size: 16px;
     margin: 0;

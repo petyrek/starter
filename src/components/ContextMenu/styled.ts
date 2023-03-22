@@ -29,7 +29,6 @@ export const ContextMenuWrap = styled.div<ContextMenuWrapProps>`
   z-index: ${theme.zIndices.contextMenu};
   overflow-y: auto;
   overflow-x: hidden;
-  width: 230px;
   border: 1px solid black;
 
   ${p => p.position};

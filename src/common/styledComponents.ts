@@ -1,7 +1,6 @@
 import { css } from "styled-components/macro"
 import * as R from "ramda"
 
-const px = R.always("px")
 const pxWhenNumber = (v: number | string): string =>
   R.type(v) === "Number" ? `${v}px` : `${v}`
 
@@ -9,74 +8,76 @@ export const rule =
   <T>(
     ruleAlias: keyof T,
     cssRuleName: string = ruleAlias as string,
-    unitFn: (v: string | number) => string = R.always(""),
+    unitFn?: (v: string | number) => string,
   ) =>
   (p: T) => {
     const value = p[ruleAlias] as string
 
-    return value
-      ? css`
-          ${cssRuleName}: ${unitFn(value)};
-        `
-      : ""
+    if (!value) return ""
+
+    return `${cssRuleName}: ${unitFn ? unitFn(value) : value};`
   }
 
 export type MarginProps = {
-  m?: number
-  mt?: number
-  mb?: number
-  ml?: number
-  mr?: number
+  m?: number | string
+  mt?: number | string
+  mb?: number | string
+  ml?: number | string
+  mr?: number | string
 }
 
 export const marginRules = css<MarginProps>`
-  ${rule("m", "margin", px)};
-  ${rule("mt", "margin-top", px)};
-  ${rule("mb", "margin-bottom", px)};
-  ${rule("ml", "margin-left", px)};
-  ${rule("mr", "margin-right", px)};
+  ${rule("m", "margin", pxWhenNumber)};
+  ${rule("mt", "margin-top", pxWhenNumber)};
+  ${rule("mb", "margin-bottom", pxWhenNumber)};
+  ${rule("ml", "margin-left", pxWhenNumber)};
+  ${rule("mr", "margin-right", pxWhenNumber)};
 `
 
 export type PaddingProps = {
-  p?: number
-  pt?: number
-  pb?: number
-  pl?: number
-  pr?: number
+  p?: number | string
+  pt?: number | string
+  pb?: number | string
+  pl?: number | string
+  pr?: number | string
 }
 
 export const paddingRules = css<PaddingProps>`
-  ${rule("p", "padding", px)};
-  ${rule("pt", "padding-top", px)};
-  ${rule("pb", "padding-bottom", px)};
-  ${rule("pl", "padding-left", px)};
-  ${rule("pr", "padding-right", px)};
+  ${rule("p", "padding", pxWhenNumber)};
+  ${rule("pt", "padding-top", pxWhenNumber)};
+  ${rule("pb", "padding-bottom", pxWhenNumber)};
+  ${rule("pl", "padding-left", pxWhenNumber)};
+  ${rule("pr", "padding-right", pxWhenNumber)};
 `
 
 export type PositionProps = {
   position?: "absolute" | "relative"
-  top?: number
-  bottom?: number
-  left?: number
-  right?: number
+  top?: number | string
+  bottom?: number | string
+  left?: number | string
+  right?: number | string
 }
 
 export const positionRules = css<PositionProps>`
   ${rule("position")};
-  ${rule("top", "top", px)};
-  ${rule("bottom", "bottom", px)};
-  ${rule("left", "left", px)};
-  ${rule("right", "right", px)};
+  ${rule("top", "top", pxWhenNumber)};
+  ${rule("bottom", "bottom", pxWhenNumber)};
+  ${rule("left", "left", pxWhenNumber)};
+  ${rule("right", "right", pxWhenNumber)};
 `
 
 export type DisplayProps = {
-  display?: "flex"
+  flex?: boolean
   flexDirection?: "column" | "row"
+  align?: "center" | "flex-start" | "flex-end"
+  gap?: number | string
 }
 
 export const displayRules = css<DisplayProps>`
-  ${rule("display")};
+  ${p => p.flex && "display: flex;"}
   ${rule("flexDirection", "flex-direction")};
+  ${rule("align", "align-items")};
+  ${rule("gap", "gap", pxWhenNumber)};
 `
 
 export type BorderProps = {

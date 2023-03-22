@@ -11,6 +11,7 @@ export type Position = {
 export const getPosition = (menu: Element, toggle: Element): Position => {
   const tRect = toggle.getBoundingClientRect()
   const mRect = menu.getBoundingClientRect()
+
   const openUpwards = tRect.top + tRect.height / 2 > window.innerHeight / 2
   const openLeft = tRect.left + tRect.width / 2 <= window.innerWidth / 2
 

@@ -1,7 +1,5 @@
 import { Portal } from "components/Portal"
 import { fromEvent } from "rxjs"
-import { useScrollLock } from "hooks/useScrollLock"
-import { throunceTime } from "common/rxjs"
 import { ContextMenuWrap, ContextToggleWrap } from "./styled"
 import { getPosition, Position } from "./helpers"
 import { FC, ReactNode, useEffect, useRef, useState } from "react"
@@ -19,15 +17,13 @@ export const ContextMenu: FC<Props> = ({ toggleElement, menuContent }) => {
   const useOpenProps = useOpen()
   const { isOpen, close } = useOpenProps
 
-  useScrollLock(isOpen)
-
   const [position, setPosition] = useState<Position>({})
   const menuRef = useRef<HTMLDivElement | null>(null)
   const toggleRef = useRef<HTMLDivElement | null>(null)
 
   useClickOutside(close, [menuRef, toggleRef])
 
-  const setup = () => {
+  const setup = (isOpen: boolean) => {
     if (!isOpen) return
 
     const menu = menuRef.current
@@ -39,25 +35,22 @@ export const ContextMenu: FC<Props> = ({ toggleElement, menuContent }) => {
   }
 
   useEffect(() => {
-    setup()
+    setup(isOpen)
   }, [isOpen]) // eslint-disable-line
 
   useEffect(() => {
-    const sub1 = fromEvent(window, "resize")
-      .pipe(throunceTime(200))
-      .subscribe(() => setup())
-
-    const sub2 = fromEvent(document, "keydown").subscribe(e => {
-      if ("key" in e && e.key === "Tab" && isOpen) {
-        e.preventDefault()
-      }
-    })
+    const resizeListener = fromEvent(window, "resize").subscribe(() =>
+      setup(isOpen),
+    )
+    const scrollListener = fromEvent(window, "scroll").subscribe(() =>
+      setup(isOpen),
+    )
 
     return () => {
-      sub1.unsubscribe()
-      sub2.unsubscribe()
+      resizeListener.unsubscribe()
+      scrollListener.unsubscribe()
     }
-  }, []) // eslint-disable-line
+  }, [isOpen]) // eslint-disable-line
 
   return (
     <>

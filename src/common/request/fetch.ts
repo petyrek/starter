@@ -1,4 +1,4 @@
-import { Observable, switchMap, throwError } from "rxjs"
+import { Observable, of, switchMap, throwError } from "rxjs"
 import { fromFetch } from "rxjs/fetch"
 
 type RxFetchProps<Data> = {
@@ -16,11 +16,14 @@ export const rxFetch = <Result, Data = {}>({
     ...config,
   }).pipe(
     switchMap(response => {
-      if (response.ok) {
-        // OK return data
-        return response.json()
+      return Promise.all([response.json(), Promise.resolve(response)])
+    }),
+    // @ts-expect-error
+    switchMap(([json, response]) => {
+      if (!response.ok) {
+        return throwError({ data: json, response })
       }
 
-      return throwError(() => new Error())
+      return of(json) as Result
     }),
   )

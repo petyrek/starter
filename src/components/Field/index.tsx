@@ -5,7 +5,7 @@ import { ReactNode } from "react"
 type Props<Values> = {
   children: ReactNode
   form: FormState<Values>
-  name: string
+  name: keyof Values
   label: string
 }
 

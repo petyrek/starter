@@ -1,12 +1,15 @@
 import { Textfield } from "components/Textfield"
 import { Form } from "components/Form"
 import { Button } from "components/Button"
-import { numberRequired, stringRequired } from "validators"
+import {
+  // numberRequired,
+  stringRequired,
+} from "common/validators"
 import { FC } from "react"
 import { Field } from "components/Field"
 import { ingredientRequest } from "data/ingredient/api"
 import { SideEffect } from "common/types"
-import * as R from "ramda"
+// import * as R from "ramda"
 import { IngredientResponse } from "data/_generated"
 
 type Props = {
@@ -36,33 +39,30 @@ export const CreateIngredientModal: FC<Props> = ({
         ? ingredientRequest.edit(ingredient.id, v)
         : ingredientRequest.create(v)
     }
-    // TODO - this Tokens type should be infered
-    onSuccess={() => {
+    onSuccess={(v: IngredientResponse) => {
+      console.log(v.name)
       close()
       refetch()
     }}
     initialValues={
       ingredient ?? {
         name: "",
-        protein: 0,
-        carbohydrates: 0,
-        fats: 0,
-        salt: 0,
-        fiber: 0,
+        // protein: 0,
+        // carbohydrates: 0,
+        // fats: 0,
+        // salt: 0,
+        // fiber: 0,
       }
     }
   >
     {({ form, onChange, hasErrors }) => (
       <>
-        {R.keys(schema).map(k => (
-          <Field name={k} form={form} label={k}>
-            <Textfield
-              type={k === "name" ? "text" : "number"}
-              value={`${form.values[k]}`}
-              onChange={(v: string) => onChange(k)(k === "name" ? v : +v)}
-            />
-          </Field>
-        ))}
+        <Field name="name" form={form} label="name">
+          <Textfield
+            value={form.values.name}
+            onChange={v => onChange("name")(v)}
+          />
+        </Field>
 
         <Button type="submit" disabled={hasErrors} text="create" />
       </>

@@ -1,53 +1,52 @@
-import * as R from "ramda"
-import { toastError } from "data/toasts/rx"
-import { Loader } from "components/Loader"
-import { noop } from "common/functions"
-import { useNavigate } from "react-router"
 import { ReactNode, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Observable } from "rxjs"
-import { Validator } from "validators"
+import { toastError } from "data/toasts/rx"
+import * as R from "ramda"
+import { Loader } from "components/Loader"
+import { Validator } from "common/validators"
 
-type Schema = Record<string, Validator<any>>
-type Errors = Record<string, string>
-type Touched = Record<string, boolean>
+type Values<T> = { [K in keyof T]: T[K] extends Validator<infer U> ? U : never }
+type Errors<T> = { [K in keyof T]: string }
+type Touched<T> = { [K in keyof T]: boolean }
 
-export type FormState<Values> = {
-  values: Values
-  errors: Errors
-  touched: Touched
+export type FormState<Schema> = {
+  values: Values<Schema>
+  errors: Errors<Schema>
+  touched: Touched<Schema>
   isSubmitting: boolean
 }
 
-type ChildrenProps<Values> = {
-  form: FormState<Values>
-  onChange: (k: keyof Values) => (v: any) => void
+type ChildrenProps<Schema> = {
+  form: FormState<Schema>
+  onChange: (k: keyof Schema) => (v: Values<Schema>[typeof k]) => void
   hasErrors: boolean
 }
 
-type Props<Values, Result> = {
+type Props<Schema, Result> = {
   schema: Schema
-  onSubmit: (values: Values) => Observable<Result>
+  onSubmit: (values: Values<Schema>) => Observable<Result>
   onSuccess: (result: Result) => void
   redirect?: (result: Result) => string
-  initialValues: Values
-  children: (p: ChildrenProps<Values>) => ReactNode
+  initialValues: Values<Schema>
+  children: (p: ChildrenProps<Schema>) => ReactNode
 }
 
-export const Form = <Values, Result>({
+export const Form = <Schema extends Record<string, Validator<any>>, Result>({
   schema,
   onSubmit,
-  onSuccess = noop,
+  onSuccess,
   redirect,
-  initialValues = {} as Values,
+  initialValues,
   children,
-}: Props<Values, Result>) => {
-  const [form, setForm] = useState<FormState<Values>>({
+}: Props<Schema, Result>) => {
+  const [form, setForm] = useState<FormState<Schema>>({
     values: initialValues,
     errors: R.mapObjIndexed(
-      (value, key) => value(initialValues[key as keyof typeof initialValues]),
+      (validator, key) => validator(initialValues[key]),
       schema,
-    ),
-    touched: {},
+    ) as Errors<Schema>,
+    touched: R.map(R.always(false), initialValues),
     isSubmitting: false,
   })
 
@@ -75,7 +74,7 @@ export const Form = <Values, Result>({
     })
   }
 
-  const handleOnChange = (name: keyof Values) => (val: any) => {
+  const handleOnChange = (name: keyof Schema) => (val: any) => {
     setForm(oldState => ({
       ...oldState,
       values: { ...oldState.values, [name]: val },

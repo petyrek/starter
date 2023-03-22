@@ -5,6 +5,7 @@ import { DatePicker } from "components/DatePicker"
 import { FC, useState } from "react"
 import { Box } from "components/Box"
 import { ButtonModal } from "components/ButtonModal"
+import { Calendar } from "components/Calendar"
 
 type Props = {}
 
@@ -21,6 +22,10 @@ export const Playground: FC<Props> = () => {
       <h1>datepicker</h1>
       <Box border="1px solid red" m={20}>
         <DatePicker value={v} onChange={setV} />
+      </Box>
+
+      <Box border="1px solid red" m={20} mt={30}>
+        <Calendar value={v} onChange={setV} />
       </Box>
 
       <ButtonModal
